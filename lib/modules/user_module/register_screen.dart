@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:terra_treasures/modules/user_module/login_screen.dart';
 import 'package:terra_treasures/util/custom_button.dart';
 import 'package:terra_treasures/util/textfield.dart';
@@ -24,7 +24,9 @@ final emailcontroller=TextEditingController();
         height: double.infinity,
         width: double.infinity,
         decoration:  BoxDecoration(
+        
           image: DecorationImage(image: AssetImage("assets/login.jpg"),
+          opacity: .4,
           fit: BoxFit.fill,
           colorFilter: ColorFilter.mode(
           Colors.black.withOpacity(0.99),
@@ -34,14 +36,20 @@ final emailcontroller=TextEditingController();
         ),
         
       ),
-     Padding(
-       padding: const EdgeInsets.only(top: 55,left:200,right: 200),
-       child: Text("Sign Up",
-                      style: GoogleFonts.inder(fontSize:30,fontWeight:FontWeight.bold,
-                      color:Colors.white),),
-     ),
+    //  Padding(
+    //    padding: const EdgeInsets.only(left:200,right: 200),
+    //    child: Text("Sign Up",
+    //                   style: GoogleFonts.inder(fontSize:20,fontWeight:FontWeight.bold,
+    //                   color:Colors.white),
+    //                   ),
+    //  )
+    Padding(
+      padding: const EdgeInsets.only(top: 100,left: 120,),
+      child: const Text("Sign Up",style: TextStyle(color: Colors.white,fontSize: 30),),
+    ),
+    
        Padding(
-         padding: const EdgeInsets.only(top: 100),
+         padding: const EdgeInsets.only(top: 200,),
 
          child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,

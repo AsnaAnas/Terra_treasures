@@ -10,6 +10,7 @@ import 'package:terra_treasures/util/textfield.dart';
 class ResetPassword extends StatelessWidget {
    ResetPassword ({super.key});
   final passwordcontroller=TextEditingController();
+  final confirmpassword=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return   Scaffold(
@@ -27,8 +28,8 @@ class ResetPassword extends StatelessWidget {
                  hintText: "New Password", obscureText: false),
                  const SizedBox(height: 20,),
                   MyTextfield(
-                controller: passwordcontroller,
-                 hintText: "Confirm Password", obscureText: false),
+                controller: confirmpassword,
+                 hintText: "Confirm Password", obscureText: true),
            const SizedBox(height: 30,),
            CustomButton(onPressed: (){
             ScaffoldMessenger.of(context).showSnackBar(const 

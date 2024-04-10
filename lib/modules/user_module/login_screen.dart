@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:terra_treasures/controller.dart';
 import 'package:terra_treasures/modules/user_module/forgot_psd.dart';
+import 'package:terra_treasures/modules/user_module/onboarding_screen.dart';
 import 'package:terra_treasures/modules/user_module/register_screen.dart';
 import 'package:terra_treasures/util/custom_button.dart';
 import 'package:terra_treasures/util/textfield.dart';
@@ -53,7 +56,7 @@ final passwordController=TextEditingController();
           
                         const SizedBox(height: 20,),
                        MyTextfield(
-                     controller: usernameController,
+                     controller: passwordController,
                      hintText: 'Password',
                      obscureText: true,
                              ),
@@ -75,9 +78,12 @@ final passwordController=TextEditingController();
                      ),
                     
                     const SizedBox(height: 30,),
-                    CustomButton(onPressed: (){
-                      // Navigator.push(context,MaterialPageRoute(builder: (context) => const home_page()) )
-                    }, text: "Sign In"),
+                    // Consumer<ControllerProvider>(
+                    //   builder: (context,ControllerProvider,_),
+                    //   child: CustomButton(onPressed: (){
+                    //      Navigator.push(context,MaterialPageRoute(builder: (context) => const OnboardingScreen()) );
+                    //   }, text: "Sign In"),
+                    // ),
                     const SizedBox(height: 20,),
                      const Text("_____________or login with______________",style: TextStyle(color: Colors.white)),
                      const SizedBox(height: 10,),

@@ -1,7 +1,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:terra_treasures/modules/user_module/home_page.dart';
+import 'package:terra_treasures/modules/user_module/home.dart';
+
 import 'package:terra_treasures/util/constants.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         actions:  [
           Padding(padding: EdgeInsets.only(right: 20,top: 20),
           child: InkWell(
-            onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const HomePage())),
+            onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const HomeScreen())),
             child: const Text('Skip',style: TextStyle(
               color: Colors.grey,
               fontSize: 16.0,fontWeight: FontWeight.w400),
@@ -78,7 +79,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                  }
                  else
                  {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const HomePage()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const HomeScreen()));
                  }
                });
                

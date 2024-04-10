@@ -13,7 +13,7 @@ class MyTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   Padding(
-              padding: const EdgeInsets.only(left: 100,right: 100),
+              padding: const EdgeInsets.only(left: 50,right: 50),
               child: TextField(
                 cursorHeight: 20,
                 controller: controller,

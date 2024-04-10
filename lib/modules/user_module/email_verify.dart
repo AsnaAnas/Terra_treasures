@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:terra_treasures/modules/user_module/login_screen.dart';
 import 'package:terra_treasures/modules/user_module/reset_password.dart';
 import 'package:terra_treasures/util/custom_button.dart';
 
@@ -12,17 +11,18 @@ class VerifyEmailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       body: Container(
-        // height: double.infinity,
-        // width: double.infinity,
-        // decoration:  BoxDecoration(
-        //   image: DecorationImage(image: const AssetImage("assets/login.jpg"),
-        //   fit: BoxFit.fill,
-        //   colorFilter: ColorFilter.mode(
-        //   Colors.black.withOpacity(0.99),
-        //   BlendMode.dstATop,
-        // ),
-        //   )
-        // ),
+        height: double.infinity,
+        width: double.infinity,
+        decoration:  BoxDecoration(
+          image: DecorationImage(image: const AssetImage("assets/login.jpg"),
+          opacity: .4,
+          fit: BoxFit.fill,
+          colorFilter: ColorFilter.mode(
+          Colors.black.withOpacity(0.99),
+          BlendMode.dstATop,
+        ),
+          )
+        ),
        
         child: Form(
           

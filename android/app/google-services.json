@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "223387694994",
+    "project_id": "terratreasures-cda36",
+    "storage_bucket": "terratreasures-cda36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223387694994:android:6c40b2363b577495d9f34b",
+        "android_client_info": {
+          "package_name": "com.example.terra_treasures"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwhr08kTRb__ShkhawLi_Z0NahgTmC5qI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

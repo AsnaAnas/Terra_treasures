@@ -1,7 +1,6 @@
-import 'dart:ui';
+
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:terra_treasures/modules/user_module/email_verify.dart';
 import 'package:terra_treasures/util/custom_button.dart';
@@ -33,9 +32,9 @@ class ForgotPsd extends StatelessWidget {
         
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 200,left: 150,right:100),
+        padding: const EdgeInsets.only(top: 150,left: 80,right:50),
         child: Text("Forget Password",style: GoogleFonts.inder(
-          fontSize:30,fontWeight:FontWeight.bold,color:Colors.white)
+          fontSize:24,fontWeight:FontWeight.bold,color:Colors.white)
         ),
       ),
       Padding(
@@ -45,7 +44,7 @@ class ForgotPsd extends StatelessWidget {
             MyTextfield(
               controller: emailcontroller, 
               hintText: "Enter your email", 
-              obscureText: true),
+              obscureText: false),
 
               const SizedBox(height: 50,),
               CustomButton(onPressed: (){
