@@ -203,7 +203,15 @@ class _HomeScreenState extends State<HomeScreen> {
         //   BottomNavigationBarItem(icon: Icon(Icons.people_alt_rounded),label: 'Community')
         // ]
         // ),
-        
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: (){},
+        //   child: Icon(Icons.more_rounded),
+        //   backgroundColor: kPrimaryColor,
+        //   foregroundColor: Colors.white,
+        //   elevation: 0,
+        //   shape: BeveledRectangleBorder(
+        //     borderRadius: 
+        //   ),),
     );
   }
 }

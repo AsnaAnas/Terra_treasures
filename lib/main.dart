@@ -1,12 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:terra_treasures/firebase_options.dart';
-import 'package:terra_treasures/modules/user_module/home.dart';
-import 'package:terra_treasures/modules/user_module/home_page.dart';
-import 'package:terra_treasures/modules/user_module/login_screen.dart';
+import 'package:terra_treasures/modules/user_module/prod.dart';
+import 'package:terra_treasures/modules/user_module/productDetails.dart';
 
-import 'package:terra_treasures/modules/user_module/onboarding_screen.dart';
-import 'package:terra_treasures/modules/user_module/welcome.dart';
 
 
 
@@ -32,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen()
+      home:  ProductDetailsPage()
     );
   }
 }
