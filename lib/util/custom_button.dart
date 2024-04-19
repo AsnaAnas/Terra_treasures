@@ -12,7 +12,7 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
        style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xff166F31),fixedSize: const Size(150, 40)) ,
+                backgroundColor: const Color(0xff166F31),fixedSize: const Size(300, 40)) ,
       child: Text(text,style: GoogleFonts.inder(color:Colors.white,fontSize:17)),
                 
               

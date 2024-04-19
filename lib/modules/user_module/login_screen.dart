@@ -78,13 +78,11 @@ final passwordController=TextEditingController();
                      ),
                     
                     const SizedBox(height: 30,),
-                    // Consumer<ControllerProvider>(
-                    //   builder: (context,ControllerProvider,_),
-                    //   child: CustomButton(onPressed: (){
-                    //      Navigator.push(context,MaterialPageRoute(builder: (context) => const OnboardingScreen()) );
-                    //   }, text: "Sign In"),
-                    // ),
-                    const SizedBox(height: 20,),
+                    CustomButton(onPressed: (){
+                       Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const OnboardingScreen()),);
+                    }, text: "Sign In"),
                      const Text("_____________or login with______________",style: TextStyle(color: Colors.white)),
                      const SizedBox(height: 10,),
                      const Row(

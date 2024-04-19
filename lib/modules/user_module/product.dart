@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/modules/user_module/cartpage.dart';
+import 'package:terra_treasures/modules/user_module/home.dart';
+import 'package:terra_treasures/modules/user_module/productDetails.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class ProductsPage extends StatelessWidget {
@@ -17,38 +20,52 @@ final List<ProductList> data=List.generate(title.length, (index) => ProductList(
       backgroundColor: bgColor,
       appBar: AppBar(
         backgroundColor: bgColor,
-        leading:  const Icon(
-          Icons.arrow_circle_left_outlined
-        ),
+        leading: IconButton(onPressed: (){
+           Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),);
+        }, icon: const Icon(Icons.arrow_circle_left_outlined)),
         title: Center(child:  Text("Kitchen" ,style: GoogleFonts.inder(),)),
-        actions: const [
+        actions:  [
           Padding(
-            padding: EdgeInsets.all(20),
-            child: Icon(Icons.shopping_bag_outlined),
+            padding: const EdgeInsets.all(20),
+            child:IconButton(onPressed: (){
+               Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartPage()),);
+            }, icon: const Icon(Icons.shopping_bag_outlined)),
           )
         ],
       ),
       body:   SafeArea(
-        child: ListView.builder(
-          itemCount: data.length,
-          itemBuilder: (context,index)
-          {
-            return Card(
-              color: bgColor,
-              child: ListTile(
-              
-                title: Text(data[index].name),
-                subtitle: Text(data[index].desc),
-                leading: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Image.asset(data[index].ImageUrl),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProductDetailsPage()),
+              );
+          },
+          child: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context,index)
+            {
+              return Card(
+                color: bgColor,
+                child: ListTile(
+                
+                  title: Text(data[index].name),
+                  subtitle: Text(data[index].desc),
+                  leading: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Image.asset(data[index].ImageUrl),
+                  ),
                 ),
-              ),
-            );
-          }
-          
-          ),
+              );
+            }
+            
+            ),
+        ),
       )
     );
   }

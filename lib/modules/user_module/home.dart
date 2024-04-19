@@ -1,7 +1,16 @@
 // import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/modules/user_module/cartpage.dart';
+import 'package:terra_treasures/modules/user_module/education.dart';
+import 'package:terra_treasures/modules/user_module/moreinfo.dart';
+import 'package:terra_treasures/modules/user_module/notification.dart';
+import 'package:terra_treasures/modules/user_module/product.dart';
+import 'package:terra_treasures/modules/user_module/sustain.dart';
 import 'package:terra_treasures/util/constants.dart';
+import 'package:terra_treasures/util/customnav.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,7 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.notifications_none_outlined))
+          IconButton(onPressed: (){
+             Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NotificationPage()),
+              );
+          }, icon: const Icon(Icons.notifications_none_outlined))
         ],
 
       ),
@@ -64,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Container(
           height: 200,
           width: double.maxFinite,
-          margin: EdgeInsets.only(top: 30,left: 20,right: 20,),
+          margin: const EdgeInsets.only(top: 30,left: 20,right: 20,),
          
            decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -85,9 +99,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 10,),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xffF9E3A4)
+                    backgroundColor: const Color(0xffF9E3A4)
                   ),
-                  onPressed: (){}, 
+                  onPressed: (){
+                    Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MoreInfo()),
+              );
+                  }, 
                   child: Text("More Information",style: GoogleFonts.inder(color:Colors.black,fontSize:11),))
                   ],
                 ),
@@ -117,14 +136,22 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset("assets/kitchen.png"),
-                    ),
-                    Text("Kitchen",style: GoogleFonts.inder(),),
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProductsPage()),
+              );
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset("assets/kitchen.png"),
+                      ),
+                      Text("Kitchen",style: GoogleFonts.inder(),),
+                    ],
+                  ),
                 ),
                 Column(
                   children: [
@@ -178,13 +205,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/sustainability.png'),
+          child: GestureDetector(
+            onTap: () {
+               Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Sustainability()),);
+            },
+            child: Image.asset('assets/sustainability.png')),
         ),
         const Padding(
           padding: EdgeInsets.only(top: 10,left: 10,right: 10),
           child: Text("Sustainability boils down to one core reason: to ensure the well-being of both our planet and ourselves, now and for future generations. It's about striking a balance between meeting our needs while preserving the resources and ecosystems that support all life. ",
           textAlign: TextAlign.justify,),
-        )
+        ),
+        
        
         ],
         
@@ -195,23 +229,105 @@ class _HomeScreenState extends State<HomeScreen> {
          
       
       
-        )
         ),
-        // bottomNavigationBar: BottomNavigationBar(items: const [
-        //   BottomNavigationBarItem(icon:Icon(Icons.home) ,label: 'home'),
-        //   BottomNavigationBarItem(icon: Icon(Icons.more_outlined),label: "more"),
-        //   BottomNavigationBarItem(icon: Icon(Icons.people_alt_rounded),label: 'Community')
-        // ]
-        // ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: (){},
-        //   child: Icon(Icons.more_rounded),
-        //   backgroundColor: kPrimaryColor,
-        //   foregroundColor: Colors.white,
-        //   elevation: 0,
-        //   shape: BeveledRectangleBorder(
-        //     borderRadius: 
-        //   ),),
+
+        ),
+
+        // bottomNavigationBar: CurvedNavigationBar(
+        //   index: 0,
+        //   color: kPrimaryColor,
+        //   backgroundColor: Colors.transparent,
+        //   buttonBackgroundColor: kPrimaryColor,
+        //   items: const [
+        //     Icon(Icons.home,color: Colors.white,),
+        //     Icon(Icons.move_down_rounded,color: Colors.white,),
+        //     Icon(Icons.people_alt,color: Colors.white,)
+        //   ]),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // bottomNavigationBar:BottomAppBar(
+        //   shape: const CircularNotchedRectangle(),
+        //   notchMargin: 10,
+        //   child: Container(
+        //     height: 60,
+        //     child:  Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       children: [
+        //         Row(
+        //           crossAxisAlignment: CrossAxisAlignment.start,
+        //           children: [
+        //              MaterialButton(
+        //               minWidth: 40,
+        //               onPressed: (){
+        //                 setState(() {
+                          
+        //                 });
+        //               },
+        //               child: Column(
+        //                 mainAxisAlignment: MainAxisAlignment.center,
+        //                 children: [
+        //                   Icon(Icons.home)
+        //                 ],
+        //               ),
+        //               )
+        //           ],
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // )
+        bottomNavigationBar:  AnimatedBottomNavigationBar(
+          barColor: kPrimaryColor,
+          bottomBarCenterModel: BottomBarCenterModel(
+            centerBackgroundColor: Colors.white,
+            centerIcon: const FloatingCenterButton(
+              child: Icon(Icons.move_up_rounded,color: kPrimaryColor,),), 
+            centerIconChild: [
+              FloatingCenterButtonChild(
+                child: const Icon(Icons.school,color: kPrimaryColor,),
+                onTap: () {
+                  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EducationContent()),
+              );
+                },
+                ),
+                FloatingCenterButtonChild(
+                child: const Icon(Icons.shopping_bag_outlined,color:kPrimaryColor),
+                onTap: () {
+                  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartPage()),
+              );
+                },
+                ),
+                FloatingCenterButtonChild(
+                child: const Icon(Icons.quiz,color: kPrimaryColor,),
+                onTap: () {
+                  
+                },
+                ),
+                FloatingCenterButtonChild(
+                child: const Icon(Icons.question_mark_outlined,color: kPrimaryColor,),
+                onTap: () {
+                  
+                },
+                )
+
+            ]), 
+          bottomBar: const [
+              BottomBarItem(
+                icon: Icon(Icons.home,color: Colors.white,),
+                 iconSelected: Icon(Icons.home),title: "Home",
+                 titleStyle:TextStyle(color: AppColors.white),
+                 dotColor: Colors.white
+                 ),
+                 BottomBarItem(
+                icon: Icon(Icons.people_alt,color: Colors.white,),
+                 iconSelected: Icon(Icons.people_alt),title: "Community",
+                 titleStyle:TextStyle(color: AppColors.white),
+                 dotColor: Colors.white)  
+          ]),
+        
     );
   }
 }
