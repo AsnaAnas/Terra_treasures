@@ -1,25 +1,19 @@
-// import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:terra_treasures/modules/user_module/cartpage.dart';
-import 'package:terra_treasures/modules/user_module/education.dart';
+import 'package:terra_treasures/modules/seller_module/add_details.dart';
+import 'package:terra_treasures/modules/seller_module/add_product.dart';
+import 'package:terra_treasures/modules/seller_module/myproduct.dart';
 import 'package:terra_treasures/modules/user_module/moreinfo.dart';
 import 'package:terra_treasures/modules/user_module/notification.dart';
 import 'package:terra_treasures/modules/user_module/product.dart';
 import 'package:terra_treasures/modules/user_module/profile.dart';
-import 'package:terra_treasures/modules/user_module/quiz_home.dart';
 import 'package:terra_treasures/modules/user_module/sustain.dart';
 import 'package:terra_treasures/util/constants.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class SellerHome extends StatelessWidget {
+  const SellerHome({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         actions: [
+           IconButton(onPressed: (){
+             Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AddProductPage()),
+              );
+          }, icon: const Icon(Icons.add)),
           IconButton(onPressed: (){
              Navigator.push(
                 context,
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.only(left: 10,top: 10,),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Text("Eco friendly Alteratives",style: GoogleFonts.inder(fontSize:15),) ,
+            child: Text("My Products",style: GoogleFonts.inder(fontSize:15),) ,
           ),
         ),
         Padding(
@@ -152,9 +152,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Image.asset("assets/kitchen.png"),
+                        child: Image.asset("assets/product1.png"),
                       ),
-                      Text("Kitchen",style: GoogleFonts.inder(),),
+                     
                     ],
                   ),
                 ),
@@ -162,9 +162,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image.asset("assets/home.png"),
+                      child: Image.asset("assets/product2.png"),
                     ),
-                    Text("Home",style: GoogleFonts.inder(),),
+                   
                   ],
                 ),
                 
@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset("assets/fashion.png"),
                     ),
-                    Text("Fashion",style: GoogleFonts.inder(),),
+                   
                   ],
                 ),
                 Column(
@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset("assets/kitchen.png"),
                     ),
-                    Text("Kitchen",style: GoogleFonts.inder(),),
+                    
                   ],
                 ),
                 Column(
@@ -192,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset("assets/kitchen.png"),
                     ),
-                    Text("Kitchen",style: GoogleFonts.inder(),),
+                    
                   ],
                 ),
 
@@ -231,55 +231,11 @@ class _HomeScreenState extends State<HomeScreen> {
         
       ),
          ]
-         
-      
-      
-        ),
 
         ),
 
-        // bottomNavigationBar: CurvedNavigationBar(
-        //   index: 0,
-        //   color: kPrimaryColor,
-        //   backgroundColor: Colors.transparent,
-        //   buttonBackgroundColor: kPrimaryColor,
-        //   items: const [
-        //     Icon(Icons.home,color: Colors.white,),
-        //     Icon(Icons.move_down_rounded,color: Colors.white,),
-        //     Icon(Icons.people_alt,color: Colors.white,)
-        //   ]),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // bottomNavigationBar:BottomAppBar(
-        //   shape: const CircularNotchedRectangle(),
-        //   notchMargin: 10,
-        //   child: Container(
-        //     height: 60,
-        //     child:  Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       children: [
-        //         Row(
-        //           crossAxisAlignment: CrossAxisAlignment.start,
-        //           children: [
-        //              MaterialButton(
-        //               minWidth: 40,
-        //               onPressed: (){
-        //                 setState(() {
-                          
-        //                 });
-        //               },
-        //               child: Column(
-        //                 mainAxisAlignment: MainAxisAlignment.center,
-        //                 children: [
-        //                   Icon(Icons.home)
-        //                 ],
-        //               ),
-        //               )
-        //           ],
-        //         )
-        //       ],
-        //     ),
-        //   ),
-        // )
+        ),
+
         bottomNavigationBar:  AnimatedBottomNavigationBar(
           barColor: kPrimaryColor,
           bottomBarCenterModel: BottomBarCenterModel(
@@ -288,38 +244,23 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Icon(Icons.move_up_rounded,color: kPrimaryColor,),), 
             centerIconChild: [
               FloatingCenterButtonChild(
-                child: const Icon(Icons.school,color: kPrimaryColor,),
+                child: const Icon(Icons.auto_awesome_motion_rounded,color: kPrimaryColor,),
                 onTap: () {
                   Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const EducationContent()),
+                MaterialPageRoute(builder: (context) =>  MyProductPage()),
               );
                 },
                 ),
                 FloatingCenterButtonChild(
-                child: const Icon(Icons.shopping_bag_outlined,color:kPrimaryColor),
+                child: const Icon(Icons.cases_sharp,color:kPrimaryColor),
                 onTap: () {
                   Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CartPage()),
+                MaterialPageRoute(builder: (context) => const AddProductDetails()),
               );
                 },
                 ),
-                FloatingCenterButtonChild(
-                child: const Icon(Icons.quiz,color: kPrimaryColor,),
-                onTap: () {
-                  Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const QuizHome()),
-              );
-                },
-                ),
-                FloatingCenterButtonChild(
-                child: const Icon(Icons.question_mark_outlined,color: kPrimaryColor,),
-                onTap: () {
-                  
-                },
-                )
 
             ]), 
           bottomBar: const [

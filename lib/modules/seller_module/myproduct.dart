@@ -1,48 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:terra_treasures/modules/user_module/cartpage.dart';
-import 'package:terra_treasures/modules/user_module/home.dart';
-import 'package:terra_treasures/modules/user_module/productDetails.dart';
+import 'package:terra_treasures/modules/seller_module/myproduct_details.dart';
+import 'package:terra_treasures/modules/seller_module/seller_home.dart';
 import 'package:terra_treasures/util/constants.dart';
 
-class ProductsPage extends StatelessWidget {
-  ProductsPage({super.key});
-
-static List<String> title=['Cocunut spoon Wood(5pc)','Cocunut spoon Wood(5pc)','Cocunut spoon Wood(5pc)','Cocunut spoon Wood(5pc)'];
-static List url=['assets/spoon.png','assets/spoon.png','assets/spoon.png','assets/spoon.png',];
+class MyProductPage extends StatelessWidget {
+   MyProductPage({super.key});
+  static List<String> title=['Recycled Egg shell Vase','Earing from Plastic','yarn Bottle Lmap','Cocunut spoon Wood(5pc)'];
+static List url=['assets/product1.png','assets/product2.png','assets/lamp.png','assets/spoon.png',];
 static List<String> sub=['150','150','150','150',];
 final List<ProductList> data=List.generate(title.length, (index) => ProductList('${title[index]}', '${url[index]}', '${sub[index]}'));
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+       backgroundColor: bgColor,
       appBar: AppBar(
         backgroundColor: bgColor,
         leading: IconButton(onPressed: (){
            Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),);
+                MaterialPageRoute(builder: (context) => const SellerHome()),);
         }, icon: const Icon(Icons.arrow_circle_left_outlined)),
         title: Center(child:  Text("Kitchen" ,style: GoogleFonts.inder(),)),
-        actions:  [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child:IconButton(onPressed: (){
-               Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CartPage()),);
-            }, icon: const Icon(Icons.shopping_bag_outlined)),
-          )
-        ],
       ),
       body:   SafeArea(
         child: GestureDetector(
           onTap: () {
             Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProductDetailsPage()),
+                MaterialPageRoute(builder: (context) => const MyProductDetails()),
               );
           },
           child: ListView.builder(
@@ -56,7 +43,7 @@ final List<ProductList> data=List.generate(title.length, (index) => ProductList(
                   title: Text(data[index].name),
                   subtitle: Row(
                     children: [
-                      Icon(Icons.currency_rupee,size: 20,),
+                      const Icon(Icons.currency_rupee,size: 20,),
                       Text(data[index].desc),
                     ],
                   ),
@@ -65,6 +52,8 @@ final List<ProductList> data=List.generate(title.length, (index) => ProductList(
                     height: 50,
                     child: Image.asset(data[index].ImageUrl),
                   ),
+                  trailing:  Text("Edit",
+                  style: GoogleFonts.inder(color:Colors.black45),),
                 ),
               );
             }
@@ -72,10 +61,10 @@ final List<ProductList> data=List.generate(title.length, (index) => ProductList(
             ),
         ),
       )
+ 
     );
   }
 }
-
 
 class ProductList
 {

@@ -25,7 +25,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         elevation: 0.0,
         backgroundColor: bgColor,
         actions:  [
-          Padding(padding: EdgeInsets.only(right: 20,top: 20),
+          Padding(padding: const EdgeInsets.only(right: 20,top: 20),
           child: InkWell(
             onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const HomeScreen())),
             child: const Text('Skip',style: TextStyle(
@@ -67,6 +67,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             bottom: 60,
             right: 30,
             child: Container(
+              padding: const EdgeInsets.all(4),
+               decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: kPrimaryColor,
+               ),
               child:  IconButton(onPressed: (){
                setState(() {
                  if(currentIndex<2)
@@ -74,7 +79,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   currentIndex++;
                   if(currentIndex < 3)
                   {
-                    _pageController.nextPage(duration: Duration(milliseconds: 600), curve: Curves.easeIn);
+                    _pageController.nextPage(duration: const Duration(milliseconds: 600), curve: Curves.easeIn);
                   }
                  }
                  else
@@ -85,11 +90,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                
               },
                icon: const Icon(Icons.arrow_forward_ios,size: 24,color: Colors.white,),color: kPrimaryColor,),
-               padding: const EdgeInsets.all(4),
-               decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: kPrimaryColor,
-               ),
             )
           ),
       ],

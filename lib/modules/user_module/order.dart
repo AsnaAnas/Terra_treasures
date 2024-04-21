@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/modules/user_module/orderdetails.dart';
+import 'package:terra_treasures/modules/user_module/profile.dart';
+import 'package:terra_treasures/modules/user_module/settings.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class MyOrderPage extends StatelessWidget {
@@ -11,7 +15,12 @@ class MyOrderPage extends StatelessWidget {
       backgroundColor: bgColor,
       appBar: AppBar(
         backgroundColor: bgColor,
-        leading: IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_circle_left_outlined)),
+        leading: IconButton(onPressed: (){
+          Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfilePage()),
+              );
+        }, icon: const Icon(Icons.arrow_circle_left_outlined)),
         title:  Center(child: Text("My Order",style: GoogleFonts.inder(),)),
       ),
       body: ListView.builder(
@@ -25,15 +34,23 @@ class MyOrderPage extends StatelessWidget {
               height: 30,
             ),
            
-             ListTile(
-                 leading: Image.asset(OrderItem.imageUrl),
-                 title: Text(OrderItem.name,style: GoogleFonts.inder(),),
-                 subtitle: Row(
-                   children: [
-                    const Icon(Icons.currency_rupee,size: 15,),
-                     Text(OrderItem.price.toString(),style: GoogleFonts.inder(),),
-                   ],
-                 ),
+             GestureDetector(
+              onTap: () {
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const OrderDetails()),
+              );
+              },
+               child: ListTile(
+                   leading: Image.asset(OrderItem.imageUrl),
+                   title: Text(OrderItem.name,style: GoogleFonts.inder(),),
+                   subtitle: Row(
+                     children: [
+                      const Icon(Icons.currency_rupee,size: 15,),
+                       Text(OrderItem.price.toString(),style: GoogleFonts.inder(),),
+                     ],
+                   ),
+               ),
              ),
               const Divider(),
            ],

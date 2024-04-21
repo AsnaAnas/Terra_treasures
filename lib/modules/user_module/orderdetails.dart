@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/modules/user_module/order.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class OrderDetails extends StatelessWidget {
@@ -11,7 +12,12 @@ class OrderDetails extends StatelessWidget {
       backgroundColor: bgColor,
       appBar: AppBar(
         backgroundColor: bgColor,
-        leading: IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_circle_left_outlined)),
+        leading: IconButton(onPressed: (){
+          Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyOrderPage()),
+              );
+        }, icon: const Icon(Icons.arrow_circle_left_outlined)),
         title: Center(child: Text("My Order",style: GoogleFonts.inder(),)),
       ),
       body:

@@ -62,7 +62,6 @@ class WelcomeScreen extends StatelessWidget {
                    ),
                    const SizedBox(height: 20,),
                     Container(
-                    //color: Colors.white,
                     height: 35,
                     width: 200,
                     decoration:  BoxDecoration(

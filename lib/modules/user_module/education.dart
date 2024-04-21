@@ -1,5 +1,8 @@
+import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/modules/user_module/cartpage.dart';
+import 'package:terra_treasures/modules/user_module/quiz_home.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class EducationContent extends StatelessWidget {
@@ -80,15 +83,67 @@ class EducationContent extends StatelessWidget {
                 IconButton(onPressed: (){}, icon: const Icon(Icons.share)),
               ],
             )
-            // ListTile(
-            //   leading: const CircleAvatar(),
-            //   title: Text("Demo Name",
-            //   style: GoogleFonts.inder(),),
-              
-            // )
+           
           ],
         ),
       ),
+       bottomNavigationBar:  AnimatedBottomNavigationBar(
+          barColor: kPrimaryColor,
+          bottomBarCenterModel: BottomBarCenterModel(
+            centerBackgroundColor: Colors.white,
+            centerIcon: const FloatingCenterButton(
+              child: Icon(Icons.move_up_rounded,color: kPrimaryColor,),), 
+            centerIconChild: [
+              FloatingCenterButtonChild(
+                child: const Icon(Icons.school,color: kPrimaryColor,),
+                onTap: () {
+                  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EducationContent()),
+              );
+                },
+                ),
+                FloatingCenterButtonChild(
+                child: const Icon(Icons.shopping_bag_outlined,color:kPrimaryColor),
+                onTap: () {
+                  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartPage()),
+              );
+                },
+                ),
+                FloatingCenterButtonChild(
+                child: const Icon(Icons.quiz,color: kPrimaryColor,),
+                onTap: () {
+                  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const QuizHome()),
+              );
+                },
+                ),
+                FloatingCenterButtonChild(
+                child: const Icon(Icons.question_mark_outlined,color: kPrimaryColor,),
+                onTap: () {
+                  
+                },
+                )
+
+            ]), 
+          bottomBar: const [
+              BottomBarItem(
+                icon: Icon(Icons.home,color: Colors.white,),
+                 iconSelected: Icon(Icons.home),title: "Home",
+                 titleStyle:TextStyle(color: AppColors.white),
+                 dotColor: Colors.white
+                 ),
+                 BottomBarItem(
+                icon: Icon(Icons.people_alt,color: Colors.white,),
+                 iconSelected: Icon(Icons.people_alt),title: "Community",
+                 titleStyle:TextStyle(color: AppColors.white),
+                 dotColor: Colors.white) ,
+                
+          ]),
+        
     );
   }
 }
