@@ -1,36 +1,38 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:terra_treasures/firebase_options.dart';
+import 'package:terra_treasures/business_logic/firebase_options.dart';
 import 'package:terra_treasures/modules/seller_module/add_details.dart';
 import 'package:terra_treasures/modules/seller_module/add_product.dart';
 import 'package:terra_treasures/modules/seller_module/myproduct.dart';
 import 'package:terra_treasures/modules/seller_module/seller_home.dart';
-import 'package:terra_treasures/modules/user_module/addresspage.dart';
-import 'package:terra_treasures/modules/user_module/cartpage.dart';
-import 'package:terra_treasures/modules/user_module/community_start.dart';
-import 'package:terra_treasures/modules/user_module/editprofile.dart';
-import 'package:terra_treasures/modules/user_module/education.dart';
-import 'package:terra_treasures/modules/user_module/forum.dart';
-import 'package:terra_treasures/modules/user_module/forum_details.dart';
-import 'package:terra_treasures/modules/user_module/home.dart';
-import 'package:terra_treasures/modules/user_module/moreinfo.dart';
-import 'package:terra_treasures/modules/user_module/notification.dart';
-import 'package:terra_treasures/modules/user_module/order.dart';
-import 'package:terra_treasures/modules/user_module/orderdetails.dart';
-import 'package:terra_treasures/modules/user_module/orderpage.dart';
-import 'package:terra_treasures/modules/user_module/orderplaced.dart';
-import 'package:terra_treasures/modules/user_module/paymentmethod.dart';
-import 'package:terra_treasures/modules/user_module/paymentpage.dart';
-import 'package:terra_treasures/modules/user_module/product.dart';
-import 'package:terra_treasures/modules/user_module/productDetails.dart';
-import 'package:terra_treasures/modules/user_module/profile.dart';
-import 'package:terra_treasures/modules/user_module/quiz_finish.dart';
-import 'package:terra_treasures/modules/user_module/quiz_home.dart';
-import 'package:terra_treasures/modules/user_module/quiz_question.dart';
-import 'package:terra_treasures/modules/user_module/quiz_start.dart';
-import 'package:terra_treasures/modules/user_module/settings.dart';
-import 'package:terra_treasures/modules/user_module/sustain.dart';
-import 'package:terra_treasures/modules/user_module/welcome.dart';
+import 'package:terra_treasures/modules/seller_module/seller_order.dart';
+import 'package:terra_treasures/modules/seller_module/sellerorder_details.dart';
+import 'package:terra_treasures/modules/user_module/screens/addresspage.dart';
+import 'package:terra_treasures/modules/user_module/screens/cartpage.dart';
+import 'package:terra_treasures/modules/user_module/screens/community_start.dart';
+import 'package:terra_treasures/modules/user_module/screens/editprofile.dart';
+import 'package:terra_treasures/modules/user_module/screens/education.dart';
+import 'package:terra_treasures/modules/user_module/screens/forum.dart';
+import 'package:terra_treasures/modules/user_module/screens/forum_details.dart';
+import 'package:terra_treasures/modules/user_module/screens/home.dart';
+import 'package:terra_treasures/modules/user_module/screens/moreinfo.dart';
+import 'package:terra_treasures/modules/user_module/screens/notification.dart';
+import 'package:terra_treasures/modules/user_module/screens/order.dart';
+import 'package:terra_treasures/modules/user_module/screens/orderdetails.dart';
+import 'package:terra_treasures/modules/user_module/screens/orderpage.dart';
+import 'package:terra_treasures/modules/user_module/screens/orderplaced.dart';
+import 'package:terra_treasures/modules/user_module/screens/paymentmethod.dart';
+import 'package:terra_treasures/modules/user_module/screens/paymentpage.dart';
+import 'package:terra_treasures/modules/user_module/screens/product.dart';
+import 'package:terra_treasures/modules/user_module/screens/productDetails.dart';
+import 'package:terra_treasures/modules/user_module/screens/profile.dart';
+import 'package:terra_treasures/modules/user_module/screens/quiz_finish.dart';
+import 'package:terra_treasures/modules/user_module/screens/quiz_home.dart';
+import 'package:terra_treasures/modules/user_module/screens/quiz_question.dart';
+import 'package:terra_treasures/modules/user_module/screens/quiz_start.dart';
+import 'package:terra_treasures/modules/user_module/screens/settings.dart';
+import 'package:terra_treasures/modules/user_module/screens/sustain.dart';
+import 'package:terra_treasures/modules/user_module/screens/welcome.dart';
 import 'package:terra_treasures/util/customnav.dart';
 import 'package:terra_treasures/util/tabview.dart';
 
@@ -59,7 +61,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:   MyProductPage()
+      home:   const SellerHome()
     );
   }
 }

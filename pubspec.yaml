@@ -41,7 +41,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   provider: ^6.1.2
   floating_bottom_bar: ^0.0.3
-  firebase_core: ^2.28.0
+  firebase_core: ^2.30.0
   firebase_auth: ^4.19.0
   curved_navigation_bar: ^1.0.3
 
