@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:terra_treasures/business_logic/firebase_options.dart';
+import 'package:terra_treasures/modules/auth_screens/login_screen.dart';
+import 'package:terra_treasures/modules/auth_screens/register_screen.dart';
 import 'package:terra_treasures/modules/seller_module/add_details.dart';
 import 'package:terra_treasures/modules/seller_module/add_product.dart';
 import 'package:terra_treasures/modules/seller_module/myproduct.dart';
@@ -39,7 +41,7 @@ import 'package:terra_treasures/util/tabview.dart';
 
 
 
-void main() async {
+Future <void> main()  async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -61,7 +63,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:   const SellerHome()
+      home:     RegisterScreen()
     );
   }
 }

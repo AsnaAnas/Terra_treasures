@@ -1,7 +1,8 @@
  import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:terra_treasures/modules/user_module/auth_screens/login_screen.dart';
-import 'package:terra_treasures/modules/user_module/auth_screens/register_screen.dart';
+import 'package:terra_treasures/modules/auth_screens/seller_login.dart';
+import 'package:terra_treasures/modules/auth_screens/login_screen.dart';
+import 'package:terra_treasures/modules/auth_screens/register_screen.dart';
 
 
 
@@ -77,7 +78,12 @@ class WelcomeScreen extends StatelessWidget {
                     child: const Text("SIGN UP",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))),
                    ),
                      const SizedBox(height: 70,),
-                  Text("Do you want to show case your product",style: GoogleFonts.inder(fontSize:13,color:Colors.white ),)
+                  GestureDetector(
+                    onTap: () {
+                       Navigator.push(context,MaterialPageRoute(builder: (context) =>   SellerLogin()) );
+                    },
+                    child: Text("Do you want to show case your product",
+                    style: GoogleFonts.inder(fontSize:13,color:Colors.white ),))
                    
                ],
             ),

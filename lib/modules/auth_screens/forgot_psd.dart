@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:terra_treasures/modules/user_module/auth_screens/email_verify.dart';
+import 'package:terra_treasures/modules/auth_screens/email_verify.dart';
 import 'package:terra_treasures/util/custom_button.dart';
 import 'package:terra_treasures/util/textfield.dart';
 

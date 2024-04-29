@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:terra_treasures/controller.dart';
-import 'package:terra_treasures/modules/user_module/auth_screens/forgot_psd.dart';
-import 'package:terra_treasures/modules/user_module/screens/onboarding_screen.dart';
-import 'package:terra_treasures/modules/user_module/auth_screens/register_screen.dart';
+import 'package:terra_treasures/modules/seller_module/seller_home.dart';
+import 'package:terra_treasures/modules/auth_screens/forgot_psd.dart';
+import 'package:terra_treasures/modules/auth_screens/register_screen.dart';
 import 'package:terra_treasures/util/custom_button.dart';
 import 'package:terra_treasures/util/textfield.dart';
 
-class LoginScreen extends StatelessWidget {
-   LoginScreen({super.key});
-
-  final usernameController=TextEditingController();
+class SellerLogin extends StatelessWidget {
+   SellerLogin({super.key});
+   final usernameController=TextEditingController();
 final passwordController=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
     return  Scaffold(
         body: Container(
           height: MediaQuery.of(context).size.height,
@@ -81,7 +76,7 @@ final passwordController=TextEditingController();
                     CustomButton(onPressed: (){
                        Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const OnboardingScreen()),);
+                MaterialPageRoute(builder: (context) => const SellerHome()),);
                     }, text: "Sign In"),
                      const Text("_____________or login with______________",style: TextStyle(color: Colors.white)),
                      const SizedBox(height: 10,),
@@ -132,6 +127,6 @@ final passwordController=TextEditingController();
               ),
         ),
           );
-       
+ 
   }
 }

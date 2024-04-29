@@ -14,7 +14,8 @@ class MyTextfield extends StatelessWidget {
   Widget build(BuildContext context) {
     return   Padding(
               padding: const EdgeInsets.only(left: 50,right: 50),
-              child: TextField(
+              child: TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 cursorHeight: 20,
                 controller: controller,
                 obscureText: obscureText,
@@ -27,6 +28,13 @@ class MyTextfield extends StatelessWidget {
                   filled: true,
                   hintText: hintText,
                 ),
+                validator: (value) {
+                  if(value!.isEmpty)
+                  {
+                    return 'Please enter your email';
+                  }
+                  return null;
+                },
               ),
             );
   }

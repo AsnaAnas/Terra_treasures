@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:terra_treasures/modules/user_module/auth_screens/reset_password.dart';
+import 'package:terra_treasures/modules/auth_screens/reset_password.dart';
 import 'package:terra_treasures/util/custom_button.dart';
 
 class VerifyEmailPage extends StatelessWidget {
