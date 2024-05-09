@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:terra_treasures/modules/seller_module/add_details.dart';
@@ -5,7 +7,36 @@ import 'package:terra_treasures/modules/seller_module/seller_home.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class AddProductPage extends StatelessWidget {
-  const AddProductPage({super.key});
+   AddProductPage({super.key});
+
+  final _auth=FirebaseAuth.instance;
+  final _pnameController=TextEditingController();
+  final _prodetailController=TextEditingController();
+   final _ecoController=TextEditingController();
+    final _categoryController=TextEditingController();
+
+
+  Future addDetails(Map<String,dynamic> regInfo, String userId)async
+{
+   return FirebaseFirestore.instance
+   .collection('product')
+   .doc(userId)
+   .set(regInfo);
+}
+
+addProduct() async
+{
+   String uid= _auth.currentUser!.uid;
+            Map<String,dynamic> registereinfomap = {
+              "prod_name": _pnameController.text,
+              "details": _prodetailController.text,
+              "eco":_ecoController.text,
+              //"category" : _passwordController.text,
+             
+            };
+            await addDetails(registereinfomap, uid);
+            //const SnackBar(content: Text("Details added to firebase Succesfully"));
+}
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +48,7 @@ class AddProductPage extends StatelessWidget {
         leading: IconButton(onPressed: (){
            Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SellerHome()),
+                MaterialPageRoute(builder: (context) =>  SellerHome()),
               );
         },
          icon: const Icon(Icons.arrow_circle_left_outlined)),
@@ -50,6 +81,7 @@ class AddProductPage extends StatelessWidget {
                padding: const EdgeInsets.only(top: 40,right: 30,left: 30),
                child: 
                    TextFormField(
+                    controller: _pnameController,
                     decoration: InputDecoration(
                       hintText: "Product Name",
                       hintStyle: GoogleFonts.inder(
@@ -63,6 +95,7 @@ class AddProductPage extends StatelessWidget {
              Padding(
                padding: const EdgeInsets.only(top: 40,right: 30,left: 30),
                child: TextFormField(
+                controller: _prodetailController,
                 decoration: InputDecoration(
                   hintText: "Product Details",
                   hintStyle: GoogleFonts.inder(
@@ -73,6 +106,7 @@ class AddProductPage extends StatelessWidget {
              ),Padding(
                padding: const EdgeInsets.only(top: 40,right: 30,left: 30),
                child: TextFormField(
+                controller: _ecoController,
                 decoration: InputDecoration(
                   hintText: "How it become Eco friendly",
                   hintStyle: GoogleFonts.inder(
@@ -100,9 +134,10 @@ class AddProductPage extends StatelessWidget {
                 backgroundColor: kPrimaryColor
               ),
               onPressed: (){
+                addProduct();
                  Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AddProductDetails()),
+                MaterialPageRoute(builder: (context) =>  AddProductDetails()),
               );
               }, 
             child: Text("CONTINUE ADD PRODUCT",style: GoogleFonts.inder(color:Colors.white),))

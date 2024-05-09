@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,7 +8,38 @@ import 'package:terra_treasures/modules/seller_module/add_product.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class AddProductDetails extends StatelessWidget {
-  const AddProductDetails({super.key});
+   AddProductDetails({super.key});
+
+  final _auth=FirebaseAuth.instance;
+  final _priceController=TextEditingController();
+  final _brandController=TextEditingController();
+  final _meterialController=TextEditingController();
+  final _methodController=TextEditingController();
+  
+  Future addDetails(Map<String,dynamic> productInfo, String userId)async
+{
+   return FirebaseFirestore.instance
+   .collection('product')
+   .doc(userId)
+   .set(productInfo);
+}
+
+addProductDetails() async
+{
+   String uid= _auth.currentUser!.uid;
+            Map<String,dynamic> productInfoMap = {
+             // "prod_name": _pnameController.text,
+              "price": _priceController.text,
+              "brand":_brandController.text,
+              "material":_meterialController.text,
+              "method":_methodController.text,
+
+              //"category" : _passwordController.text,
+             
+            };
+            await addDetails(productInfoMap, uid);
+            //const SnackBar(content: Text("Details added to firebase Succesfully"));
+}
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +50,7 @@ class AddProductDetails extends StatelessWidget {
         leading: IconButton(onPressed: (){
            Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AddProductPage()),
+                MaterialPageRoute(builder: (context) =>  AddProductPage()),
               );
         },
          icon: const Icon(Icons.arrow_circle_left_outlined)),
@@ -77,6 +110,7 @@ class AddProductDetails extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 28,right: 28,top: 15),
               child: TextFormField(
+                controller: _priceController,
                 decoration: InputDecoration(
                   hintText: "Price(Rs)",
                   hintStyle:  GoogleFonts.inder(
@@ -87,6 +121,7 @@ class AddProductDetails extends StatelessWidget {
             ),Padding(
               padding:const EdgeInsets.only(left: 28,right: 28,top: 15),
               child: TextFormField(
+                 controller: _brandController,
                 decoration: InputDecoration(
                   hintText: "Brand",
                   hintStyle:  GoogleFonts.inder(
@@ -97,6 +132,7 @@ class AddProductDetails extends StatelessWidget {
             ),Padding(
               padding: const EdgeInsets.only(left: 28,right: 28,top: 15),
               child: TextFormField(
+                 controller: _meterialController,
                 decoration: InputDecoration(
                   hintText: "Material",
                   hintStyle:  GoogleFonts.inder(
@@ -107,6 +143,7 @@ class AddProductDetails extends StatelessWidget {
             ),Padding(
               padding: const EdgeInsets.only(left: 28,right: 28,top: 15,),
               child: TextFormField(
+                 controller: _methodController,
                 decoration: InputDecoration(
                   hintText: "Method of production",
                   hintStyle:  GoogleFonts.inder(
@@ -121,7 +158,7 @@ class AddProductDetails extends StatelessWidget {
                 onTap: () {
                    Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AddProductPage()),
+                MaterialPageRoute(builder: (context) =>  AddProductPage()),
               );
                 },
                  child: Row(
@@ -141,6 +178,7 @@ class AddProductDetails extends StatelessWidget {
                 backgroundColor: kPrimaryColor
               ),
               onPressed: (){
+                addProductDetails();
                   ScaffoldMessenger.of(context).showSnackBar(const 
             SnackBar(content: Text("Product Posted Successfully"),
             showCloseIcon: true,

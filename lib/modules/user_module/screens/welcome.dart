@@ -1,8 +1,12 @@
- import 'package:flutter/material.dart';
+
+
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terra_treasures/modules/auth_screens/seller_login.dart';
-import 'package:terra_treasures/modules/auth_screens/login_screen.dart';
-import 'package:terra_treasures/modules/auth_screens/register_screen.dart';
+import 'package:terra_treasures/auth/login_screen.dart';
+import 'package:terra_treasures/auth/register_screen.dart';
+import 'package:terra_treasures/modules/user_module/screens/home.dart';
 
 
 
@@ -10,6 +14,20 @@ import 'package:terra_treasures/modules/auth_screens/register_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
+
+  check(BuildContext context)async{
+    SharedPreferences preferences=await SharedPreferences.getInstance();
+    String? name=preferences.getString('isloggin');
+
+    if(name!=null)
+    {
+       Navigator.push(context,MaterialPageRoute(builder: (context) =>  HomeScreen()) );
+    }
+    else
+    {
+      Navigator.push(context,MaterialPageRoute(builder: (context) =>  LoginScreen()) );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

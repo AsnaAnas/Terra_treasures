@@ -3,33 +3,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:random_string/random_string.dart';
-
-import 'package:terra_treasures/modules/auth_screens/login_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/auth/login_screen.dart';
+import 'package:terra_treasures/modules/auth_screens/seller_login.dart';
 import 'package:terra_treasures/util/custom_button.dart';
-//import 'package:terra_treasures/util/textfield.dart';
 
-class RegisterScreen extends StatefulWidget {
-   const RegisterScreen({super.key});
+
+class SellerRegister extends StatefulWidget {
+   const SellerRegister({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<SellerRegister> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends State<SellerRegister> {
   final _formkey=GlobalKey<FormState>();
   final _usernameController=TextEditingController();
   final _passwordController=TextEditingController();
   final _phonecontroller=TextEditingController();
   final _emailcontroller=TextEditingController();
   final _confirmpassword=TextEditingController();
+  final _cityController=TextEditingController();
+  final _stateController=TextEditingController();
+  final _houseController=TextEditingController();
+  final _placeController=TextEditingController();
   String email="",password="";
+
+  final _auth = FirebaseAuth.instance;
 //Add details into firebase
 
 Future addDetails(Map<String,dynamic> regInfo, String userId)async
 {
    return FirebaseFirestore.instance
-   .collection('register')
+   .collection('seller')
    .doc(userId)
    .set(regInfo);
 }
@@ -46,18 +52,23 @@ registration() async
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => LoginScreen(),
+            builder: (context) => SellerLogin(),
           ));
 
-          String registered_user_id = randomString(10);
+          // String registered_user_id = randomString(10);
+          String uid= _auth.currentUser!.uid;
             Map<String,dynamic> registereinfomap = {
               "name": _usernameController.text,
               "email": _emailcontroller.text,
               "phone":_phonecontroller.text,
               "password" : _passwordController.text,
-              "id": registered_user_id,
+              "city" : _cityController.text,
+               "state" : _stateController.text,
+                "house_no" : _houseController.text,
+                 "place" : _placeController.text,
+              "id": uid,
             };
-            await addDetails(registereinfomap, registered_user_id);
+            await addDetails(registereinfomap, uid);
             const SnackBar(content: Text("Details added to firebase Succesfully"));
 } on FirebaseAuthException catch (e) {
   if (e.code == 'weak-password') {
@@ -96,13 +107,7 @@ registration() async
         ),
         
       ),
-    //  Padding(
-    //    padding: const EdgeInsets.only(left:200,right: 200),
-    //    child: Text("Sign Up",
-    //                   style: GoogleFonts.inder(fontSize:20,fontWeight:FontWeight.bold,
-    //                   color:Colors.white),
-    //                   ),
-    //  )
+   
     const Padding(
       padding: EdgeInsets.only(top: 100,left: 120,),
       child: Text("Sign Up",style: TextStyle(color: Colors.white,fontSize: 30),),
@@ -260,13 +265,91 @@ registration() async
                       return null;
                     },
                   ),
-                      //    MyTextfield(
-                      //  controller: passwordController,
-                      //  hintText: 'Confirm Password',
-                      //  obscureText: false,
-                      //          ),
-             
-                      // const SizedBox(height: 20,),
+                      const SizedBox(height: 10,),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 170,
+                        child: TextFormField(
+                                controller: _cityController,
+                                cursorHeight: 20,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                              enabledBorder:  OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.black),
+                                 borderRadius: BorderRadius.circular(17),
+                                 
+                               ),
+                             fillColor: Colors.white,
+                              filled: true,
+                              hintText: "City",
+                              hintStyle: GoogleFonts.inder(color:Colors.black),
+                              
+                               ),
+                              ),
+                      ),
+                      SizedBox(width: 20,),
+
+                      SizedBox(
+                    width: 170,
+                    child: TextFormField(
+                            controller: _stateController,
+                            cursorHeight: 20,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                          enabledBorder:  OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.black),
+                             borderRadius: BorderRadius.circular(17),
+                             
+                           ),
+                         fillColor: Colors.white,
+                          filled: true,
+                          hintText: "State",
+                          hintStyle: GoogleFonts.inder(color:Colors.black),
+                          
+                           ),
+                          ),
+                  ),
+                    ],
+                  ),
+                  const SizedBox(height: 10,),
+                  TextFormField(
+                          controller: _houseController,
+                          cursorHeight: 20,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                        enabledBorder:  OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.black),
+                           borderRadius: BorderRadius.circular(17),
+                           
+                         ),
+                       fillColor: Colors.white ,
+                        filled: true,
+                        hintText: "House No:,Building name",
+                        hintStyle: GoogleFonts.inder(color:Colors.black),
+                        
+                         ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                                controller: _placeController,
+                                cursorHeight: 20,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                              enabledBorder:  OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.black),
+                                 borderRadius: BorderRadius.circular(17),
+                                 
+                               ),
+                              fillColor: Colors.white,
+                              filled: true,
+                              hintText: "Road name,Area, Colony(Required)",
+                              hintStyle: GoogleFonts.inder(color:Colors.black),
+                              
+                               ),
+                              ),
                        
                  
                       const SizedBox(height: 60,),
@@ -278,16 +361,7 @@ registration() async
                             password=_passwordController.text;
                           });
                           registration();
-                //          Navigator.push(context,MaterialPageRoute(builder: (context) =>  const LoginScreen()
-                //          )
-                //           );
-                //            ScaffoldMessenger.of(context).showSnackBar(const 
-                // SnackBar(content: Text("register Successfully"),
-                // showCloseIcon: true,
-                // backgroundColor: Color.fromARGB(255, 0, 124, 43),
-                // duration: Duration(seconds: 2),
-                // behavior: SnackBarBehavior.floating,
-                // margin: EdgeInsets.only(bottom:50,left: 50,right: 50),));
+               
                       }
                         
                 

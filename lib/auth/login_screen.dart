@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terra_treasures/modules/auth_screens/forgot_psd.dart';
-import 'package:terra_treasures/modules/user_module/screens/home.dart';
 import 'package:terra_treasures/modules/user_module/screens/onboarding_screen.dart';
-import 'package:terra_treasures/modules/auth_screens/register_screen.dart';
+import 'package:terra_treasures/auth/register_screen.dart';
 import 'package:terra_treasures/util/custom_button.dart';
 //import 'package:terra_treasures/util/textfield.dart';
 
@@ -26,11 +26,13 @@ String email="",password="";
 
 login()async
 {
+  SharedPreferences preferences=await SharedPreferences.getInstance();
   try {
   final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
     email: email,
     password: password,
  );
+ preferences.setString('islogging', credential.user!.uid);
  ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('Sign in succesfull')));
         Navigator.pushReplacement(
@@ -38,17 +40,12 @@ login()async
             MaterialPageRoute(
               builder: (context) => const OnboardingScreen(),
             ));
-} on FirebaseAuthException catch (e) {
-  if (e.code == 'user-not-found') {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('The user is not found'),
-          ));
-  } else if (e.code == 'wrong-password') {
-     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('Wrong password'),
-          ));
+
   }
-}
+on FirebaseAuthException catch (e) {
+    ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Invalid username or password')));
+  }
 }
 
   @override

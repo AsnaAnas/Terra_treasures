@@ -1,22 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:terra_treasures/modules/seller_module/add_details.dart';
 import 'package:terra_treasures/modules/seller_module/add_product.dart';
 import 'package:terra_treasures/modules/seller_module/myproduct.dart';
+import 'package:terra_treasures/modules/seller_module/seller_profile.dart';
 import 'package:terra_treasures/modules/user_module/screens/community_start.dart';
 import 'package:terra_treasures/modules/user_module/screens/moreinfo.dart';
 import 'package:terra_treasures/modules/user_module/screens/notification.dart';
 import 'package:terra_treasures/modules/user_module/screens/product.dart';
-import 'package:terra_treasures/modules/user_module/screens/profile.dart';
 import 'package:terra_treasures/modules/user_module/screens/sustain.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class SellerHome extends StatelessWidget {
-  const SellerHome({super.key});
+   SellerHome({super.key});
+
+  final _firestor=FirebaseFirestore.instance;
+  final _auth=FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
+    
+     String id= _auth.currentUser!.uid;
+
     return Scaffold(
       backgroundColor: const Color(0xffFEF7EB),
       appBar: AppBar(
@@ -26,23 +34,31 @@ class SellerHome extends StatelessWidget {
         IconButton(onPressed: (){
            Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
+                MaterialPageRoute(builder: (context) => const SellerProfile()),
               );
         }, icon: const Icon(Icons.account_circle,size: 50,)),
         title:  Padding(
           padding: const EdgeInsets.only(top: 15),
-          child: Column(
+          child: StreamBuilder(stream: _firestor.collection('seller').doc(id).snapshots(),
+           builder: (context,snapshot)
+           {
+            DocumentSnapshot data=snapshot.data!;
+                return Column(
             children: [
-              Text("Hi,Name",style: GoogleFonts.inder(),),
+              Text("Hi,${data['name']}",style: GoogleFonts.inder(),),
               Text("Welcome Back!",style: GoogleFonts.inder(color:Colors.grey,fontSize:16),),
             ],
-          ),
+          );
+           }
+          
+           )
+           
         ),
         actions: [
            IconButton(onPressed: (){
              Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AddProductPage()),
+                MaterialPageRoute(builder: (context) =>  AddProductPage()),
               );
           }, icon: const Icon(Icons.add)),
           IconButton(onPressed: (){
@@ -258,7 +274,7 @@ class SellerHome extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AddProductDetails()),
+                MaterialPageRoute(builder: (context) =>  AddProductDetails()),
               );
                 },
                 ),
@@ -273,7 +289,7 @@ class SellerHome extends StatelessWidget {
                  onTap: (value) {
                     Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SellerHome()),
+                MaterialPageRoute(builder: (context) =>  SellerHome()),
               );
                  },
                  ),

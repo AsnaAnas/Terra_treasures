@@ -1,4 +1,9 @@
 // import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
+
+
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,31 +25,65 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+   
+   final  _firestor= FirebaseFirestore.instance;
+final _auth=FirebaseAuth.instance;
+     
   @override
   Widget build(BuildContext context) {
+    String id= _auth.currentUser!.uid;
     return Scaffold(
       backgroundColor: const Color(0xffFEF7EB),
       appBar: AppBar(
         toolbarHeight: 100,
         backgroundColor: const Color(0xffFEF7EB),
         leading: 
-        IconButton(onPressed: (){
-           Navigator.push(
+           StreamBuilder(stream: _firestor.collection('register').doc(id).snapshots(), 
+           builder: (context,snapshot)
+           {
+            DocumentSnapshot data= snapshot.data!;
+            String imageUrl=data['image'];
+            return  GestureDetector(
+              onTap: (){
+                 Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const ProfilePage()),
               );
-        }, icon: const Icon(Icons.account_circle,size: 50,)),
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20,left: 15,),
+                child: CircleAvatar(
+                 backgroundImage: NetworkImage(imageUrl),
+                          
+                        ),
+              ),
+            );
+           }
+           ),
+          
+        // IconButton(onPressed: (){
+         
+        //    Navigator.push(
+        //         context,
+        //         MaterialPageRoute(builder: (context) => const ProfilePage()),
+        //       );
+        // }, icon: const Icon(Icons.account_circle,size: 50,)),
         title:  Padding(
           padding: const EdgeInsets.only(top: 15),
-          child: Column(
+          child: StreamBuilder(stream: _firestor.collection('register').doc(id).snapshots(),
+           builder: (context, snapshot) {
+            DocumentSnapshot data= snapshot.data!; 
+            return Column(
             children: [
-              Text("Hi,Name",style: GoogleFonts.inder(),),
+              Text("Hi, ${data['name']}",style: GoogleFonts.inder(),),
               Text("Welcome Back!",style: GoogleFonts.inder(color:Colors.grey,fontSize:16),),
             ],
-          ),
+          );
+          },)
         ),
         actions: [
           IconButton(onPressed: (){
+             
              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const NotificationPage()),
@@ -337,5 +376,5 @@ class _HomeScreenState extends State<HomeScreen> {
           ]),
         
     );
-  }
+      }
 }

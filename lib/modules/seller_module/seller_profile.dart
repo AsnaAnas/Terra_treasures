@@ -17,14 +17,14 @@ import 'package:terra_treasures/modules/user_module/screens/order.dart';
 import 'package:terra_treasures/modules/user_module/screens/settings.dart';
 import 'package:terra_treasures/util/constants.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class SellerProfile extends StatefulWidget {
+  const SellerProfile({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<SellerProfile> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<SellerProfile> {
   
    final  _firestor= FirebaseFirestore.instance;
    final _auth=FirebaseAuth.instance;
@@ -55,25 +55,10 @@ if (_auth.currentUser != null) {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                StreamBuilder(stream:_firestor.collection('register').doc(id).snapshots() , 
-                builder: (context,snapshot)
-                {
-                  DocumentSnapshot data=snapshot.data!;
-                  String imageUrl= data['image'];
-                   return    Padding(
-                padding: const EdgeInsets.only(top: 20,left: 15,),
-                child: CircleAvatar(
-                 backgroundImage: NetworkImage(imageUrl),
-                 radius: 60,
-                          
-                        ),
-              );
-                }
-                ),
-              
+                Image.asset('assets/profile.png'),
                 StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                  
-                  stream: _firestor.collection('register').doc(id).snapshots(),
+                  stream: _firestor.collection('seller').doc(id).snapshots(),
                   builder: (context, snapshot) {
                     DocumentSnapshot data=snapshot.data!;
                    
@@ -238,12 +223,11 @@ if (_auth.currentUser != null) {
                                 ),),
                             IconButton(onPressed: ()async
                             {
-                              _showLogoutBottomSheet();
-                              // SharedPreferences preferences=await SharedPreferences.getInstance();
-                              // _auth.signOut().then((value) =>
-                              //  Navigator.push(context,MaterialPageRoute(builder: (context) =>  const LoginScreen()) ));
-                              //  preferences.clear();
-                              //  log('Logout sucessfully' as num);
+                              SharedPreferences preferences=await SharedPreferences.getInstance();
+                              _auth.signOut().then((value) =>
+                               Navigator.push(context,MaterialPageRoute(builder: (context) =>  const LoginScreen()) ));
+                               preferences.clear();
+                               log('Logout sucessfully' as num);
                             }, icon: const Icon(Icons.arrow_forward_ios_rounded))
                         ],
                        ),
@@ -314,57 +298,5 @@ if (_auth.currentUser != null) {
           ]),
         
     );
-
-
-
-
   }
-
-  void _showLogoutBottomSheet() {
-  showModalBottomSheet(
-    context: context,
-    builder: (BuildContext context) {
-      return Container(
-        height: MediaQuery.of(context).size.height * 0.3,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Are you sure you want to logout?',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    SharedPreferences preferences = await SharedPreferences.getInstance();
-                    _auth.signOut().then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()))); // Use pushReplacement here
-                    preferences.clear();
-                    // log('logout successfully' as num);
-
-                    print('Logout confirmed');
-                    Navigator.pop(context);
-                  },
-                  child: Text('Logout'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Cancel'),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-    },
-  );
 }
-
-}
-
-
-

@@ -20,7 +20,7 @@ final List<ProductList> data=List.generate(title.length, (index) => ProductList(
         leading: IconButton(onPressed: (){
            Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SellerHome()),);
+                MaterialPageRoute(builder: (context) =>  SellerHome()),);
         }, icon: const Icon(Icons.arrow_circle_left_outlined)),
         title: Center(child:  Text("Kitchen" ,style: GoogleFonts.inder(),)),
       ),
