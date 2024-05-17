@@ -31,12 +31,36 @@ class SellerHome extends StatelessWidget {
         toolbarHeight: 100,
         backgroundColor: const Color(0xffFEF7EB),
         leading: 
-        IconButton(onPressed: (){
-           Navigator.push(
+        StreamBuilder(stream: _firestor.collection('seller').doc(id).snapshots(),
+         builder: (context,snapshot)
+         {
+          DocumentSnapshot data=snapshot.data!;
+          String imageUrl=data['image'];
+            return Padding(
+              padding: const EdgeInsets.only(top: 20,left: 10),
+              child: GestureDetector(
+                onTap: () {
+                   Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const SellerProfile()),
               );
-        }, icon: const Icon(Icons.account_circle,size: 50,)),
+                },
+                child: CircleAvatar(
+                      
+                      backgroundImage: imageUrl!=null
+                      ? NetworkImage(imageUrl) : AssetImage("assets/avatar.png")
+                      as ImageProvider<Object> ,
+                      radius: 70, 
+                ),
+              ),
+            );
+         }),
+        // IconButton(onPressed: (){
+        //    Navigator.push(
+        //         context,
+        //         MaterialPageRoute(builder: (context) => const SellerProfile()),
+        //       );
+        // }, icon: const Icon(Icons.account_circle,size: 50,)),
         title:  Padding(
           padding: const EdgeInsets.only(top: 15),
           child: StreamBuilder(stream: _firestor.collection('seller').doc(id).snapshots(),

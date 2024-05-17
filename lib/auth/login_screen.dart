@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terra_treasures/modules/auth_screens/forgot_psd.dart';
 import 'package:terra_treasures/modules/user_module/screens/onboarding_screen.dart';
-import 'package:terra_treasures/auth/register_screen.dart';
+import 'package:terra_treasures/auth/registerpage.dart';
 import 'package:terra_treasures/util/custom_button.dart';
 //import 'package:terra_treasures/util/textfield.dart';
 
@@ -81,144 +81,148 @@ on FirebaseAuthException catch (e) {
          child: Form(
               key: _formkey,
            child: SingleChildScrollView(
-             child: Column(
-                       children: [
-                        //  MyTextfield(
-                        //  controller: usernameController,
-                        //   hintText: 'Username',
-                        //   obscureText: false,
-                        //              ),
-                        TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  cursorHeight: 20,
-                  controller: _usernameController,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    enabledBorder:  OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.grey),
-                       borderRadius: BorderRadius.circular(17),
-                     ),
-                    fillColor: Colors.white,
-                    filled: true,
-                    hintText: "User name",
-                  ),
-                  validator: (value) {
-                    if(value!.isEmpty)
-                    {
-                      return 'Please enter your username';
-                    }
-                    return null;
-                  },
-                ),
-                        
-                     
-                          const SizedBox(height: 20,),
-                      //    MyTextfield(
-                      //  controller: passwordController,
-                      //  hintText: 'Password',
-                      //  obscureText: true,
-                      //          ),
-             
-                      TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  cursorHeight: 20,
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    enabledBorder:  OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.grey),
-                       borderRadius: BorderRadius.circular(17),
-                     ),
-                    fillColor: Colors.white,
-                    filled: true,
-                    hintText:"Password",
-                  ),
-                  validator: (value) {
-                    if(value!.isEmpty)
-                    {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
-                ),
-                      const SizedBox(height: 10,),
-                       
-                    
-                       Padding(
-                         padding: const EdgeInsets.only(right: 20),
-                         child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ForgotPsd()),
-                );
-              },
-              child: Align(alignment:Alignment.centerRight,child:  Text("Forgot Password?",style: GoogleFonts.inder(fontSize:15,color:Colors.white))),
-                     ),
-                        
-                       ),
-                      
-                      const SizedBox(height: 30,),
-                      CustomButton(onPressed: (){
-                        if(_formkey.currentState!.validate()){
-                          setState(() {
-                            email=_usernameController.text;
-                            password=_passwordController.text;
-                          });
-                          login();
-                  //           Navigator.push(
-                  // context,
-                  // MaterialPageRoute(builder: (context) => const OnboardingScreen()),);
-                  //       }
-                  //       else{
-                  //         ScaffoldMessenger.of(context).showSnackBar(
-                  //           SnackBar(content: Text('Invalid username or password',
-                  //           style: GoogleFonts.inder(fontSize:16,color:Colors.grey)))
-                  //         );
-                       }
-                        
-                      }, text: "Sign In"),
-                       const Text("_____________or login with______________",style: TextStyle(color: Colors.white)),
-                       const SizedBox(height: 10,),
-                       const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+             child: Padding(
+               padding: const EdgeInsets.all(20),
+               child: Column(
                          children: [
-                  
-                  Image(image: AssetImage('assets/google.png'),height: 20,),
-                 // Image(image: AssetImage('assets/facebook.png'),height: 20,),
-                  
-                         ],
+                          //  MyTextfield(
+                          //  controller: usernameController,
+                          //   hintText: 'Username',
+                          //   obscureText: false,
+                          //              ),
+                          TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    
+                    controller: _usernameController,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      enabledBorder:  OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.grey),
+                         borderRadius: BorderRadius.circular(17),
                        ),
-                      // const SizedBox(height: 20,),
-                       Padding(
-                         padding: const EdgeInsets.only(right: 20),
-                         child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text("Don't have an account?",
-                              style: GoogleFonts.inder(fontSize:16,color:Colors.grey)),
-                              Padding(
-                         padding: const EdgeInsets.only(right: 20),
-                         child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RegisterScreen()),
-                );
-              },
-              child: Align(alignment:Alignment.centerRight,child:  Text("Sign Up",style: GoogleFonts.inder(fontSize:15,color:Colors.white))),
-                     ),
+                      fillColor: Colors.white,
+                      filled: true,
+                      hintText: "User name",
+                    ),
+                    validator: (value) {
+                      if(value!.isEmpty)
+                      {
+                        return 'Please enter your username';
+                      }
+                      return null;
+                    },
+                  ),
+                          
                        
+                            const SizedBox(height: 20,),
+                        //    MyTextfield(
+                        //  controller: passwordController,
+                        //  hintText: 'Password',
+                        //  obscureText: true,
+                        //          ),
+               
+                        TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                   
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      enabledBorder:  OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.grey),
+                         borderRadius: BorderRadius.circular(17),
                        ),
-                              
-                            ],
-                          ),
-                                           ),
-                       )
-                       ],
+                      fillColor: Colors.white,
+                      filled: true,
+                      hintText:"Password",
+                    ),
+                    validator: (value) {
+                      if(value!.isEmpty)
+                      {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
+                  ),
+                        const SizedBox(height: 10,),
+                         
+                      
+                         Padding(
+                           padding: const EdgeInsets.only(right: 20),
+                           child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ForgotPsd()),
+                  );
+                },
+                child: Align(alignment:Alignment.centerRight,child:  Text("Forgot Password?",style: GoogleFonts.inder(fontSize:15,color:Colors.white))),
+                       ),
+                          
+                         ),
+                        
+                        const SizedBox(height: 30,),
+                        CustomButton(onPressed: (){
+                          if(_formkey.currentState!.validate()){
+                            setState(() {
+                              email=_usernameController.text;
+                              password=_passwordController.text;
+                            });
+                            login();
+                    //           Navigator.push(
+                    // context,
+                    // MaterialPageRoute(builder: (context) => const OnboardingScreen()),);
+                    //       }
+                    //       else{
+                    //         ScaffoldMessenger.of(context).showSnackBar(
+                    //           SnackBar(content: Text('Invalid username or password',
+                    //           style: GoogleFonts.inder(fontSize:16,color:Colors.grey)))
+                    //         );
+                         }
+                          
+                        }, text: "Sign In"),
+                         const Text("_____________or login with______________",style: TextStyle(color: Colors.white)),
+                         const SizedBox(height: 10,),
+                         const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                           children: [
+                    
+                    Image(image: AssetImage('assets/google.png'),height: 40,),
+
+                   // Image(image: AssetImage('assets/facebook.png'),height: 20,),
+                    
+                           ],
+                         ),
+                        const SizedBox(height: 20,),
+                         Padding(
+                           padding: const EdgeInsets.only(right: 20),
+                           child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text("Don't have an account?",
+                                style: GoogleFonts.inder(fontSize:16,color:Colors.grey)),
+                                Padding(
+                           padding: const EdgeInsets.only(right: 20),
+                           child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RegisterPage()),
+                  );
+                },
+                child: Align(alignment:Alignment.centerRight,child:  Text("Sign Up",style: GoogleFonts.inder(fontSize:15,color:Colors.white))),
+                       ),
+                         
+                         ),
+                                
+                              ],
+                            ),
+                                             ),
+                         )
+                         ],
+               ),
              ),
            ),
          ),

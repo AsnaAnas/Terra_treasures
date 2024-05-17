@@ -1,12 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:terra_treasures/auth/register_screen.dart';
-import 'package:terra_treasures/business_logic/firebase_options.dart';
 import 'package:terra_treasures/auth/login_screen.dart';
+import 'package:terra_treasures/auth/registerpage.dart';
+import 'package:terra_treasures/business_logic/firebase_options.dart';
+
+import 'package:terra_treasures/crud/ui.dart';
+import 'package:terra_treasures/modules/seller_module/seller_home.dart';
 import 'package:terra_treasures/modules/user_module/screens/home.dart';
 import 'package:terra_treasures/modules/user_module/screens/profile.dart';
-import 'package:terra_treasures/modules/user_module/screens/welcome.dart';
-import 'package:terra_treasures/registerpage.dart';
+import 'package:terra_treasures/splash.dart';
+import 'package:terra_treasures/tapped.dart';
+
  
 
 
@@ -33,7 +37,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:       HomeScreen()
+      home:        const HomeScreen()
     );
   }
 }

@@ -1,14 +1,13 @@
-import 'dart:math';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terra_treasures/auth/login_screen.dart';
+import 'package:terra_treasures/model/user_model.dart';
 import 'package:terra_treasures/modules/user_module/screens/cartpage.dart';
 import 'package:terra_treasures/modules/user_module/screens/editprofile.dart';
 import 'package:terra_treasures/modules/user_module/screens/education.dart';
@@ -58,12 +57,14 @@ if (_auth.currentUser != null) {
                 StreamBuilder(stream:_firestor.collection('register').doc(id).snapshots() , 
                 builder: (context,snapshot)
                 {
-                  DocumentSnapshot data=snapshot.data!;
-                  String imageUrl= data['image'];
+                  UserModel userModel=UserModel.fromMap(snapshot.data!.data()!);
+           
+           String image=userModel.imageUrl.toString();
+                  
                    return    Padding(
                 padding: const EdgeInsets.only(top: 20,left: 15,),
                 child: CircleAvatar(
-                 backgroundImage: NetworkImage(imageUrl),
+                 backgroundImage: NetworkImage(image),
                  radius: 60,
                           
                         ),
@@ -75,9 +76,10 @@ if (_auth.currentUser != null) {
                  
                   stream: _firestor.collection('register').doc(id).snapshots(),
                   builder: (context, snapshot) {
-                    DocumentSnapshot data=snapshot.data!;
+                  
+                 UserModel userModel=UserModel.fromMap(snapshot.data!.data()!);
                    
-                   return  Text(" ${data['name']}",
+                   return  Text(userModel.name,
                   style: GoogleFonts.inder(
                     fontSize:18,
                      ),);
@@ -134,7 +136,7 @@ if (_auth.currentUser != null) {
                            IconButton(onPressed: (){
                              Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()),
+                MaterialPageRoute(builder: (context) =>  SettingsPage()),
               );
                            }, icon: const Icon(Icons.arrow_forward_ios_rounded))
                           ],

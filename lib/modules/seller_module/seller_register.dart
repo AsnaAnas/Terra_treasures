@@ -66,6 +66,7 @@ registration() async
                "state" : _stateController.text,
                 "house_no" : _houseController.text,
                  "place" : _placeController.text,
+                 "image":'',
               "id": uid,
             };
             await addDetails(registereinfomap, uid);

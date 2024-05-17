@@ -7,20 +7,21 @@ import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:terra_treasures/model/user_model.dart';
+import 'package:terra_treasures/modules/seller_module/seller_home.dart';
 import 'package:terra_treasures/modules/user_module/screens/cartpage.dart';
+import 'package:terra_treasures/modules/user_module/screens/community_start.dart';
 import 'package:terra_treasures/modules/user_module/screens/education.dart';
 import 'package:terra_treasures/modules/user_module/screens/profile.dart';
 import 'package:terra_treasures/util/constants.dart';
 
-class EditProfile extends StatefulWidget {
-   EditProfile({super.key});
+class SellerEditProfile extends StatefulWidget {
+   SellerEditProfile({super.key});
 
   @override
-  State<EditProfile> createState() => _EditProfileState();
+  State<SellerEditProfile> createState() => _EditProfileState();
 }
 
-class _EditProfileState extends State<EditProfile> {
+class _EditProfileState extends State<SellerEditProfile> {
   final _firestor= FirebaseFirestore.instance;
 
   final _auth=FirebaseAuth.instance;
@@ -58,40 +59,32 @@ class _EditProfileState extends State<EditProfile> {
           child: Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 30),
-              child: StreamBuilder(stream: _firestor.collection('register').doc(id).snapshots(), 
+              child: StreamBuilder(stream: _firestor.collection('seller').doc(id).snapshots(), 
               builder: (context,snapshot)
               {
-                UserModel userModel = UserModel.fromMap(snapshot.data!.data()!);
-                
-                String image=userModel.imageUrl.toString();
-                _nameController.text=userModel.name;
-                _emailController.text=userModel.email;
-                _phoneController.text=userModel.phone;
+                DocumentSnapshot data=snapshot.data!;
+                String imageUrl=data['image'];
+                _nameController.text=data['name'];
+                _emailController.text=data['email'];
+                _phoneController.text=data['phone'];
                   return Column(
                 children: [
                  Stack(
                   children: [
-                    // Container(
-                    //    width: 200,
-                    //    height: 200,
-                    //    decoration: BoxDecoration(
-                    //     shape: BoxShape.circle,
-                    //     color: Colors.white,
-                    //     image: DecorationImage(
-                    //       fit: BoxFit.cover,
-                    //       image: selectedImage!=null
-                    //       ?FileImage(selectedImage!)
-                    //       :AssetImage(image)
-                    //       as ImageProvider<Object>
-                    //       )
-                    //    ),
-                    // ),
-
-                    CircleAvatar(
-                      radius: 100,
-                     backgroundImage: selectedImage != null
-                          ? FileImage(selectedImage!)
-                          :  NetworkImage(image) as ImageProvider,
+                    Container(
+                       width: 200,
+                       height: 200,
+                       decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: selectedImage!=null
+                          ?FileImage(selectedImage!)
+                          :AssetImage(imageUrl)
+                          as ImageProvider<Object>
+                          )
+                       ),
                     ),
                    
                     Padding(
@@ -112,8 +105,8 @@ class _EditProfileState extends State<EditProfile> {
           
                           await snapshot.ref.getDownloadURL().then((url){
                             String id= _auth.currentUser!.uid;
-                            FirebaseFirestore.instance.collection('register')
-                            .doc(id).update({'imageUrl':url});
+                            FirebaseFirestore.instance.collection('seller')
+                            .doc(id).update({'image':url});
                           } );
                        }
                        );
@@ -223,18 +216,32 @@ class _EditProfileState extends State<EditProfile> {
                 )
 
             ]), 
-          bottomBar: const [
+          bottomBar:  [
               BottomBarItem(
-                icon: Icon(Icons.home,color: Colors.white,),
-                 iconSelected: Icon(Icons.home),title: "Home",
-                 titleStyle:TextStyle(color: AppColors.white),
-                dotColor: Colors.white
+                icon: const Icon(Icons.home,color: Colors.white,),
+                 iconSelected: const Icon(Icons.home),title: "Home",
+                 titleStyle:const TextStyle(color: AppColors.white),
+                dotColor: Colors.white,
+                onTap: (value) {
+                  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  SellerHome()),
+              );
+                },
                  ),
                  BottomBarItem(
-                icon: Icon(Icons.people_alt,color: Colors.white,),
-                 iconSelected: Icon(Icons.people_alt),title: "Community",
-                 titleStyle:TextStyle(color: AppColors.white),
-                 dotColor: Colors.white)  
+                icon: const Icon(Icons.people_alt,color: Colors.white,),
+                 iconSelected: const Icon(Icons.people_alt),title: "Community",
+                 titleStyle:const TextStyle(color: AppColors.white),
+                 dotColor: Colors.white,
+                 onTap: (value) {
+                   Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CommunityStart()),
+              );
+                 },
+                 )
+                 
           ]),
         
     );

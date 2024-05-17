@@ -2,11 +2,15 @@
 
 
 
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/model/user_model.dart';
 import 'package:terra_treasures/modules/user_module/screens/cartpage.dart';
 import 'package:terra_treasures/modules/user_module/screens/education.dart';
 import 'package:terra_treasures/modules/user_module/screens/moreinfo.dart';
@@ -28,10 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
    
    final  _firestor= FirebaseFirestore.instance;
 final _auth=FirebaseAuth.instance;
+File? selectedImage;
      
   @override
   Widget build(BuildContext context) {
     String id= _auth.currentUser!.uid;
+    //log(id);
     return Scaffold(
       backgroundColor: const Color(0xffFEF7EB),
       appBar: AppBar(
@@ -41,8 +47,10 @@ final _auth=FirebaseAuth.instance;
            StreamBuilder(stream: _firestor.collection('register').doc(id).snapshots(), 
            builder: (context,snapshot)
            {
-            DocumentSnapshot data= snapshot.data!;
-            String imageUrl=data['image'];
+            UserModel userModel=UserModel.fromMap(snapshot.data!.data()!);
+           
+           String image=userModel.imageUrl.toString();
+          
             return  GestureDetector(
               onTap: (){
                  Navigator.push(
@@ -53,7 +61,8 @@ final _auth=FirebaseAuth.instance;
               child: Padding(
                 padding: const EdgeInsets.only(top: 20,left: 15,),
                 child: CircleAvatar(
-                 backgroundImage: NetworkImage(imageUrl),
+                 backgroundImage: NetworkImage(image),
+                          radius: 70,
                           
                         ),
               ),
@@ -70,16 +79,39 @@ final _auth=FirebaseAuth.instance;
         // }, icon: const Icon(Icons.account_circle,size: 50,)),
         title:  Padding(
           padding: const EdgeInsets.only(top: 15),
-          child: StreamBuilder(stream: _firestor.collection('register').doc(id).snapshots(),
-           builder: (context, snapshot) {
-            DocumentSnapshot data= snapshot.data!; 
-            return Column(
-            children: [
-              Text("Hi, ${data['name']}",style: GoogleFonts.inder(),),
-              Text("Welcome Back!",style: GoogleFonts.inder(color:Colors.grey,fontSize:16),),
-            ],
-          );
-          },)
+          // child: StreamBuilder(stream: _firestor.collection('register').doc(id).snapshots(),
+          //  builder: (context, snapshot) {
+          //   log(snapshot.data!.data()!.toString());
+          //   log("Helloooooo");
+            
+          //   UserModel userModel=UserModel.fromData(snapshot.data!.data()!);
+            
+          //   return Column(
+          //   children: [
+          //     // Text(
+          //     //   userModel.name,style: GoogleFonts.inder(),),
+            child:   Column(
+              children: [
+                StreamBuilder(stream:_firestor.collection("register").doc(id).snapshots(), 
+                
+                builder: (context, snapshot){
+
+                   UserModel userModel=UserModel.fromMap(snapshot.data!.data()!);
+                  //  if(snapshot.connectionState == ConnectionState.waiting)
+                  //  {
+                  //   const Center(child: CircularProgressIndicator(),);
+                  //  }
+                  return   Text(
+                  userModel.name,
+                  
+                  style: GoogleFonts.inder(),);
+                },),
+                Text("Welcome Back!",style: GoogleFonts.inder(color:Colors.grey,fontSize:16),),
+              ],
+            ),
+          //   ],
+          // );
+          // },)
         ),
         actions: [
           IconButton(onPressed: (){
@@ -378,3 +410,8 @@ final _auth=FirebaseAuth.instance;
     );
       }
 }
+
+
+
+
+

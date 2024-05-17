@@ -1,21 +1,35 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:terra_treasures/modules/seller_module/add_product.dart';
 import 'package:terra_treasures/util/constants.dart';
 
-class AddProductDetails extends StatelessWidget {
+class AddProductDetails extends StatefulWidget {
    AddProductDetails({super.key});
 
+  @override
+  State<AddProductDetails> createState() => _AddProductDetailsState();
+}
+
+class _AddProductDetailsState extends State<AddProductDetails> {
   final _auth=FirebaseAuth.instance;
+
   final _priceController=TextEditingController();
+
   final _brandController=TextEditingController();
+
   final _meterialController=TextEditingController();
+
   final _methodController=TextEditingController();
-  
+
+  File? selectedImage;
+
   Future addDetails(Map<String,dynamic> productInfo, String userId)async
 {
    return FirebaseFirestore.instance
@@ -38,11 +52,12 @@ addProductDetails() async
              
             };
             await addDetails(productInfoMap, uid);
-            //const SnackBar(content: Text("Details added to firebase Succesfully"));
+           
 }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
        backgroundColor: bgColor,
        appBar: AppBar(
@@ -73,7 +88,7 @@ addProductDetails() async
                     height: 1.0, 
                     color: Colors.grey, 
                      ),
-                     const Icon(Icons.looks_two_outlined,color: Color(0xffE8A125),size: 30,),
+                     const Icon(Icons.looks_two,color: kPrimaryColor,size: 30,),
                    
                     
                   ],
@@ -196,8 +211,23 @@ addProductDetails() async
        ),
     );
   }
+
   void showImagePickerOption(BuildContext context)
   {
+      Future<void> _pickedImageGallery()async{
+      final pickedImage= await ImagePicker().pickImage(source: ImageSource.gallery);
+      if(pickedImage==null) return;
+      setState(() {
+        selectedImage=File(pickedImage.path);
+      });
+    }
+      Future<void> _pickedImageCamera()async{
+      final pickedImage= await ImagePicker().pickImage(source: ImageSource.camera);
+      if(pickedImage==null) return;
+      setState(() {
+        selectedImage=File(pickedImage.path);
+      });
+    }
     showModalBottomSheet(context: context,
      builder: (builder){
         return  Padding(
@@ -213,7 +243,11 @@ addProductDetails() async
                     child:  SizedBox(
                       child: Column(
                         children: [
-                          const Icon(Icons.image,size: 50,),
+                          IconButton(onPressed: (){
+                            _pickedImageGallery();
+                          }, 
+                          icon: const Icon(Icons.image,size: 50,)),
+                          //const Icon(Icons.image,size: 50,),
                           Text("Gallery",style: GoogleFonts.inder(),)
                         ],
                       ),
@@ -226,7 +260,11 @@ addProductDetails() async
                     child:  SizedBox(
                       child: Column(
                         children: [
-                          const Icon(Icons.camera_alt,size: 50,),
+                          IconButton(onPressed: (){
+                            _pickedImageCamera();
+                          },
+                           icon:const Icon(Icons.camera_alt,size: 50,),),
+                         // const Icon(Icons.camera_alt,size: 50,),
                           Text("Camera",style: GoogleFonts.inder(),)
                         ],
                       ),

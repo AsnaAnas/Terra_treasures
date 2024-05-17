@@ -6,8 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terra_treasures/modules/auth_screens/forgot_psd.dart';
 import 'package:terra_treasures/modules/seller_module/seller_home.dart';
 import 'package:terra_treasures/modules/seller_module/seller_register.dart';
-import 'package:terra_treasures/modules/user_module/screens/onboarding_screen.dart';
-import 'package:terra_treasures/auth/register_screen.dart';
 import 'package:terra_treasures/util/custom_button.dart';
 //import 'package:terra_treasures/util/textfield.dart';
 

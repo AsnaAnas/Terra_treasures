@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terra_treasures/auth/login_screen.dart';
-import 'package:terra_treasures/model/user_model.dart';
+import 'package:terra_treasures/modules/seller_module/seller_profile.dart';
 import 'package:terra_treasures/modules/user_module/screens/profile.dart';
 import 'package:terra_treasures/util/constants.dart';
 
-class SettingsPage extends StatelessWidget {
-   SettingsPage({super.key});
+class SellerSettingsPage extends StatelessWidget {
+   SellerSettingsPage({super.key});
 
   final _firestor=FirebaseFirestore.instance;
   final _auth=FirebaseAuth.instance;
@@ -30,11 +30,11 @@ class SettingsPage extends StatelessWidget {
         },
          icon: const Icon(Icons.arrow_circle_left_outlined))
       ),
-      body: StreamBuilder(stream: _firestor.collection('register').doc(id).snapshots() , 
+      body: StreamBuilder(stream: _firestor.collection('seller').doc(id).snapshots() , 
       builder: (context,snapshot)
       {
-       UserModel userModel = UserModel.fromMap(snapshot.data!.data()!);
-        String imageUrl= userModel.imageUrl.toString();
+        DocumentSnapshot data= snapshot.data!;
+        String imageUrl= data['image'];
         return  ListView(
         children: [
           ListTile(
@@ -44,7 +44,7 @@ class SettingsPage extends StatelessWidget {
             ),
             title: Text("Welcome",
             style: GoogleFonts.inder(color:Colors.grey),),
-            subtitle: Text(userModel.name,
+            subtitle: Text("${data['name']}",
             style: GoogleFonts.inder(fontSize:18),),
             trailing: IconButton(onPressed: (){
               _showLogoutBottomSheet(context);
@@ -60,7 +60,7 @@ class SettingsPage extends StatelessWidget {
             trailing: IconButton(onPressed: (){
                Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
+                MaterialPageRoute(builder: (context) => const SellerProfile()),
               );
             },
              icon: const Icon(Icons.arrow_forward_ios)),
