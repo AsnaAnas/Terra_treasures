@@ -209,66 +209,124 @@ File? selectedImage;
                 borderRadius: BorderRadius.circular(10),
             ),
             
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProductsPage()),
-              );
-                  },
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset("assets/kitchen.png"),
-                      ),
-                      Text("Kitchen",style: GoogleFonts.inder(),),
-                    ],
-                  ),
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset("assets/home.png"),
-                    ),
-                    Text("Home",style: GoogleFonts.inder(),),
-                  ],
-                ),
+            // child: ListView(
+            //   scrollDirection: Axis.horizontal,
+            //   children: [
+            //     GestureDetector(
+            //       onTap: () {
+            //         Navigator.push(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => ProductsPage()),
+            //   );
+            //       },
+            //       child: Column(
+            //         children: [
+            //           Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: Image.asset("assets/kitchen.png"),
+            //           ),
+            //           Text("Kitchen",style: GoogleFonts.inder(),),
+            //         ],
+            //       ),
+            //     ),
+            //     Column(
+            //       children: [
+            //         Padding(
+            //           padding: const EdgeInsets.all(8.0),
+            //           child: Image.asset("assets/home.png"),
+            //         ),
+            //         Text("Home",style: GoogleFonts.inder(),),
+            //       ],
+            //     ),
                 
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset("assets/fashion.png"),
-                    ),
-                    Text("Fashion",style: GoogleFonts.inder(),),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset("assets/kitchen.png"),
-                    ),
-                    Text("Kitchen",style: GoogleFonts.inder(),),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset("assets/kitchen.png"),
-                    ),
-                    Text("Kitchen",style: GoogleFonts.inder(),),
-                  ],
-                ),
+            //     Column(
+            //       children: [
+            //         Padding(
+            //           padding: const EdgeInsets.all(8.0),
+            //           child: Image.asset("assets/fashion.png"),
+            //         ),
+            //         Text("Fashion",style: GoogleFonts.inder(),),
+            //       ],
+            //     ),
+            //     Column(
+            //       children: [
+            //         Padding(
+            //           padding: const EdgeInsets.all(8.0),
+            //           child: Image.asset("assets/kitchen.png"),
+            //         ),
+            //         Text("Kitchen",style: GoogleFonts.inder(),),
+            //       ],
+            //     ),
+            //     Column(
+            //       children: [
+            //         Padding(
+            //           padding: const EdgeInsets.all(8.0),
+            //           child: Image.asset("assets/kitchen.png"),
+            //         ),
+            //         Text("Kitchen",style: GoogleFonts.inder(),),
+            //       ],
+            //     ),
 
-              ],
-            ),
+            //   ],
+            // ),
+
+            child: ListView(
+  scrollDirection: Axis.horizontal,
+  children: [
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProductsPage(category: "Kitchen")),
+        );
+      },
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset("assets/kitchen.png"),
+          ),
+          Text("Kitchen", style: GoogleFonts.inder()),
+        ],
+      ),
+    ),
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProductsPage(category: "Home")),
+        );
+      },
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset("assets/home.png"),
+          ),
+          Text("Home", style: GoogleFonts.inder()),
+        ],
+      ),
+    ),
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProductsPage(category: "Fashion")),
+        );
+      },
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset("assets/fashion.png"),
+          ),
+          Text("Fashion", style: GoogleFonts.inder()),
+        ],
+      ),
+    ),
+    // Add more categories similarly
+  ],
+),
             
           ),
         ),

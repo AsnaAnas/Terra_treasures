@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/model/seller_model.dart';
 import 'package:terra_treasures/modules/seller_module/add_details.dart';
 import 'package:terra_treasures/modules/seller_module/add_product.dart';
 import 'package:terra_treasures/modules/seller_module/myproduct.dart';
@@ -34,8 +35,9 @@ class SellerHome extends StatelessWidget {
         StreamBuilder(stream: _firestor.collection('seller').doc(id).snapshots(),
          builder: (context,snapshot)
          {
-          DocumentSnapshot data=snapshot.data!;
-          String imageUrl=data['image'];
+          SellerModel sellerModel= SellerModel.fromMap(snapshot.data!.data()!);
+          // DocumentSnapshot data=snapshot.data!;
+          String image=sellerModel.imageUrl.toString();
             return Padding(
               padding: const EdgeInsets.only(top: 20,left: 10),
               child: GestureDetector(
@@ -47,8 +49,8 @@ class SellerHome extends StatelessWidget {
                 },
                 child: CircleAvatar(
                       
-                      backgroundImage: imageUrl!=null
-                      ? NetworkImage(imageUrl) : AssetImage("assets/avatar.png")
+                      backgroundImage: image!=null
+                      ? NetworkImage(image) : const AssetImage("assets/avatar.png")
                       as ImageProvider<Object> ,
                       radius: 70, 
                 ),
@@ -66,10 +68,10 @@ class SellerHome extends StatelessWidget {
           child: StreamBuilder(stream: _firestor.collection('seller').doc(id).snapshots(),
            builder: (context,snapshot)
            {
-            DocumentSnapshot data=snapshot.data!;
+           SellerModel sellerModel = SellerModel.fromMap(snapshot.data!.data()!);
                 return Column(
             children: [
-              Text("Hi,${data['name']}",style: GoogleFonts.inder(),),
+              Text(sellerModel.name,style: GoogleFonts.inder(),),
               Text("Welcome Back!",style: GoogleFonts.inder(color:Colors.grey,fontSize:16),),
             ],
           );
@@ -184,10 +186,10 @@ class SellerHome extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProductsPage()),
-              );
+              //       Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => ProductsPage()),
+              // );
                   },
                   child: Column(
                     children: [

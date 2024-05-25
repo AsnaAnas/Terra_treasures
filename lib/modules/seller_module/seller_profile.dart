@@ -1,4 +1,4 @@
-import 'dart:math';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terra_treasures/auth/login_screen.dart';
+import 'package:terra_treasures/model/seller_model.dart';
 import 'package:terra_treasures/modules/seller_module/seller_editprofile.dart';
 import 'package:terra_treasures/modules/seller_module/seller_settings.dart';
 import 'package:terra_treasures/modules/user_module/screens/cartpage.dart';
@@ -56,11 +57,11 @@ if (_auth.currentUser != null) {
                 StreamBuilder(stream: _firestor.collection('seller').doc(id).snapshots(),
                  builder: (context,snapshot)
                  {
-                  DocumentSnapshot data=snapshot.data!;
-                  String imageUrl=data['image'];
+                  SellerModel sellerModel = SellerModel.fromMap(snapshot.data!.data()!);
+                  String image=sellerModel.imageUrl.toString();
                     return  CircleAvatar(
                   radius: 80,
-                  backgroundImage: NetworkImage(imageUrl),
+                  backgroundImage: NetworkImage(image),
                 );
                  }
                  ),
@@ -70,9 +71,9 @@ if (_auth.currentUser != null) {
                  
                   stream: _firestor.collection('seller').doc(id).snapshots(),
                   builder: (context, snapshot) {
-                    DocumentSnapshot data=snapshot.data!;
+                     SellerModel sellerModel = SellerModel.fromMap(snapshot.data!.data()!);
                    
-                   return  Text(" ${data['name']}",
+                   return  Text(sellerModel.name,
                   style: GoogleFonts.inder(
                     fontSize:18,
                      ),);

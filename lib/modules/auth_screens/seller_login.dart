@@ -77,7 +77,7 @@ on FirebaseAuthException catch (e) {
         ),
               ),
                Padding(
-         padding: const EdgeInsets.only(top: 200),
+         padding: const EdgeInsets.only(top: 200,left: 30,right: 30,),
          child: Form(
               key: _formkey,
            child: SingleChildScrollView(
@@ -206,7 +206,7 @@ on FirebaseAuthException catch (e) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SellerRegister()),
+                  MaterialPageRoute(builder: (context) => SellerRegisterPage()),
                 );
               },
               child: Align(alignment:Alignment.centerRight,child:  Text("Sign Up",style: GoogleFonts.inder(fontSize:15,color:Colors.white))),

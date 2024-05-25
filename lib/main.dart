@@ -5,6 +5,7 @@ import 'package:terra_treasures/auth/registerpage.dart';
 import 'package:terra_treasures/business_logic/firebase_options.dart';
 
 import 'package:terra_treasures/crud/ui.dart';
+import 'package:terra_treasures/dropdown.dart';
 import 'package:terra_treasures/modules/seller_module/seller_home.dart';
 import 'package:terra_treasures/modules/user_module/screens/home.dart';
 import 'package:terra_treasures/modules/user_module/screens/profile.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:        const HomeScreen()
+      home:         SplashScreen()
     );
   }
 }
