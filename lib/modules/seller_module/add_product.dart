@@ -295,19 +295,7 @@ class _AddProductPageState extends State<AddProductPage> {
       return;
     }
 
-    //String uid = _auth.currentUser!.uid;
-    // Map<String, dynamic> productInfo = {
-    //   "prod_name": _pnameController.text,
-    //   "details": _prodetailController.text,
-    //   "eco": _ecoController.text,
-    //   "category": tappedIndex,
-    //   "price": int.parse(_priceController.text),
-    //   "brand": _brandController.text,
-    //   "material": _materialController.text,
-    //   "method": _methodController.text,
-    //   "imageUrl": imageUrl,
-    //   //"id": uid,
-    // };
+   
 
     await productController.create(
       _pnameController.text,
@@ -315,14 +303,14 @@ class _AddProductPageState extends State<AddProductPage> {
       _ecoController.text,
       imageUrl,
       gridMap[tappedIndex]['title'],
-      int.parse(_priceController.text),
+      double.parse(_priceController.text),
       _brandController.text,
       _materialController.text,
       _methodController.text,
     );
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Details added to Firebase successfully")),
+      const SnackBar(content: Text("Details added successfully")),
     );
   }
 

@@ -182,9 +182,9 @@ class CartPage extends StatelessWidget {
                   fixedSize: const Size(300, 35)
                 ),
                 onPressed: (){
-                   Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const PaymentPage()),);
+                //    Navigator.push(
+                // context,
+                // MaterialPageRoute(builder: (context) => const PaymentPage()),);
                 },
                child: Padding(
                  padding: const EdgeInsets.only(left: 60),

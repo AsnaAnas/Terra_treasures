@@ -94,6 +94,7 @@ class Controller {
     await docRef.set(userModel.toMap());
     fetchAllUser();
   }
+  
 
   Future<void> create(String name, String email, String phoneNumber, String imageUrl) async {
     final collectionRef = FirebaseFirestore.instance.collection('register');

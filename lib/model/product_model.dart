@@ -53,7 +53,7 @@ ProductModel({
       material: data["material"],
       brand: data["brand"],
       category: data["category"] ?? 'Uncategorized',
-      price:  _parsePrice(data['price']),
+      price:  data['price'],
     );
   }
 

@@ -6,6 +6,7 @@ class UserModel {
   String phone;
   String? imageUrl;
   String? id;
+  
 
   UserModel({
     required this.name,

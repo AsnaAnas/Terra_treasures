@@ -1,9 +1,35 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/modules/user_module/screens/controller/address_controller.dart';
 import 'package:terra_treasures/util/constants.dart';
 
-class AddressPage extends StatelessWidget {
-  const AddressPage({super.key});
+class AddressPage extends StatefulWidget {
+  
+
+   AddressPage({super.key});
+
+  @override
+  State<AddressPage> createState() => _AddressPageState();
+}
+
+class _AddressPageState extends State<AddressPage> {
+  final _nameController = TextEditingController();
+
+  final _phoneController = TextEditingController();
+
+  final _pincodeController = TextEditingController();
+
+  final _cityController = TextEditingController();
+
+  final _stateController = TextEditingController();
+
+  final _distController = TextEditingController();
+
+  final _houseController = TextEditingController();
+
+  final _streetController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +81,7 @@ class AddressPage extends StatelessWidget {
                 Column(
                   children: [
                   TextFormField(
+                    controller: _nameController,
                     cursorHeight: 20,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -68,8 +95,9 @@ class AddressPage extends StatelessWidget {
                   hintStyle: GoogleFonts.inder(color:Colors.grey)
                 ),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   TextFormField(
+                    controller: _phoneController,
                     cursorHeight: 20,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -90,7 +118,7 @@ class AddressPage extends StatelessWidget {
                       SizedBox(
                         width: 170,
                         child: TextFormField(
-                          
+                          controller: _pincodeController,
                           cursorHeight: 20,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -110,21 +138,39 @@ class AddressPage extends StatelessWidget {
                       SizedBox(
                         height: 50,
                        // width: 100,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: kPrimaryColor,
-                          ),
-                          onPressed: (){}, 
-                        child:  Row(
-                          children: [
-                            const Icon(Icons.my_location_outlined,color: Colors.white,),
-                            Text(
-                              "Use my location",
-                              style: GoogleFonts.inder(
-                                color:Colors.white
-                              ),),
-                          ],
-                        ),
+                        // child: ElevatedButton(
+                        //   style: ElevatedButton.styleFrom(
+                        //     backgroundColor: kPrimaryColor,
+                        //   ),
+                        //   onPressed: (){}, 
+                        // child:  Row(
+                        //   children: [
+                        //     const Icon(Icons.my_location_outlined,color: Colors.white,),
+                        //     Text(
+                        //       "Use my location",
+                        //       style: GoogleFonts.inder(
+                        //         color:Colors.white
+                        //       ),),
+                        //   ],
+                        // ),
+                        // ),
+                        width: 170,
+                        child: TextFormField(
+                          controller: _distController,
+                          cursorHeight: 20,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                        enabledBorder:  OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.grey),
+                           borderRadius: BorderRadius.circular(17),
+                           
+                         ),
+                        fillColor: bgColor,
+                        filled: true,
+                        hintText: "District(Required)",
+                        hintStyle: GoogleFonts.inder(color:Colors.grey),
+                        
+                         ),
                         ),
                       )
                     ],
@@ -135,7 +181,7 @@ class AddressPage extends StatelessWidget {
                       SizedBox(
                         width: 170,
                         child: TextFormField(
-                                
+                                controller: _cityController,
                                 cursorHeight: 20,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -152,12 +198,12 @@ class AddressPage extends StatelessWidget {
                                ),
                               ),
                       ),
-                      SizedBox(width: 20,),
+                      const SizedBox(width: 20,),
 
                       SizedBox(
                     width: 170,
                     child: TextFormField(
-                            
+                            controller: _stateController,
                             cursorHeight: 20,
                             obscureText: false,
                             decoration: InputDecoration(
@@ -178,7 +224,7 @@ class AddressPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10,),
                   TextFormField(
-                          
+                          controller: _houseController,
                           cursorHeight: 20,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -198,7 +244,7 @@ class AddressPage extends StatelessWidget {
                           height: 10,
                         ),
                         TextFormField(
-                                
+                                controller: _streetController,
                                 cursorHeight: 20,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -221,7 +267,9 @@ class AddressPage extends StatelessWidget {
                                   style: ElevatedButton.styleFrom(
                                   backgroundColor: kPrimaryColor
                                   ),
-                                  onPressed: (){}, 
+                                  onPressed: (){
+                                    addAddress();
+                                  }, 
                                 child:  Text(
                                   "SAVE ADDRESS",
                                   style: GoogleFonts.inder(color:Colors.white),)),
@@ -232,6 +280,44 @@ class AddressPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> addAddress() async {
+    final addressController = AddressController();
+
+    // Ensure all fields are filled
+    if (_nameController.text.isEmpty ||
+    _phoneController.text.isEmpty||
+     _pincodeController.text.isEmpty||
+        _distController.text.isEmpty ||
+         _cityController.text.isEmpty ||
+        _stateController.text.isEmpty ||
+        _houseController.text.isEmpty ||
+        _streetController.text.isEmpty 
+       
+        ) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please fill all the fields.")),
+      );
+      return;
+    }
+
+   
+
+    await addressController.create(
+      _nameController.text,
+      _phoneController.text,
+       _pincodeController.text,
+      _distController.text,
+       _cityController.text,
+      _stateController.text,
+      _houseController.text,
+      _streetController.text,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Details added successfully")),
     );
   }
 }

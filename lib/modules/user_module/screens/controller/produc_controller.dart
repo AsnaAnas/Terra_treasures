@@ -16,7 +16,7 @@ class ProductController {
       String eco,
       String imageUrl,
       String category,
-      int price,
+      double price,
       String brand,
       String material,
       String method,

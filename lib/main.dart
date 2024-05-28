@@ -1,16 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:terra_treasures/auth/login_screen.dart';
-import 'package:terra_treasures/auth/registerpage.dart';
 import 'package:terra_treasures/business_logic/firebase_options.dart';
-
-import 'package:terra_treasures/crud/ui.dart';
-import 'package:terra_treasures/dropdown.dart';
-import 'package:terra_treasures/modules/seller_module/seller_home.dart';
-import 'package:terra_treasures/modules/user_module/screens/home.dart';
-import 'package:terra_treasures/modules/user_module/screens/profile.dart';
 import 'package:terra_treasures/splash.dart';
-import 'package:terra_treasures/tapped.dart';
+
 
  
 
