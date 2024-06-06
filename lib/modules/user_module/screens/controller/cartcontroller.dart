@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:terra_treasures/model/cart_model.dart';
 
 class CartController {
+ 
+
   String? getCurrentUserId() {
     User? user = FirebaseAuth.instance.currentUser;
     return user?.uid;
@@ -14,11 +16,12 @@ class CartController {
       print('User is not logged in');
       return;
     }
-
+   int quantity=1;
     CartModel newCart = CartModel(
       productId: productId,
-      userId: userId,
-    );
+       userId: userId, 
+    quantity:quantity );
+
 
     CollectionReference carts = FirebaseFirestore.instance.collection('cart');
     await carts.add(newCart.toMap()).then((_) {

@@ -20,10 +20,10 @@ class QuizStart extends StatelessWidget {
             child: AppBar(
               backgroundColor: kPrimaryColor,
               leading: IconButton(onPressed: (){
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const QuizHome()),
-              );
+              //   Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const QuizHome()),
+              // );
               },
                icon: const Icon(Icons.arrow_circle_left_outlined,size: 30,color: Colors.white,)),
                title: Text("Quiz", style: GoogleFonts.inder(color:Colors.white,fontSize:24,),),

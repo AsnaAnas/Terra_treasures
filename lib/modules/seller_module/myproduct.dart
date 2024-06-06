@@ -1,73 +1,89 @@
+
+import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:terra_treasures/modules/seller_module/myproduct_details.dart';
+import 'package:terra_treasures/model/product_model.dart';
 import 'package:terra_treasures/modules/seller_module/seller_home.dart';
+import 'package:terra_treasures/modules/user_module/screens/productDetails.dart';
 import 'package:terra_treasures/util/constants.dart';
 
-class MyProductPage extends StatelessWidget {
-   MyProductPage({super.key});
-  static List<String> title=['Recycled Egg shell Vase','Earing from Plastic','yarn Bottle Lmap','Cocunut spoon Wood(5pc)'];
-static List url=['assets/product1.png','assets/product2.png','assets/lamp.png','assets/spoon.png',];
-static List<String> sub=['150','150','150','150',];
-final List<ProductList> data=List.generate(title.length, (index) => ProductList('${title[index]}', '${url[index]}', '${sub[index]}'));
+class ProductsPage extends StatelessWidget {
+  //final String category;
+ // final String productId;
+  ProductsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+   String sellerId = FirebaseAuth.instance.currentUser!.uid;
+
     return Scaffold(
-       backgroundColor: bgColor,
+      backgroundColor: bgColor,
       appBar: AppBar(
         backgroundColor: bgColor,
-        leading: IconButton(onPressed: (){
-           Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  SellerHome()),);
-        }, icon: const Icon(Icons.arrow_circle_left_outlined)),
-        title: Center(child:  Text("Kitchen" ,style: GoogleFonts.inder(),)),
-      ),
-      body:   SafeArea(
-        child: GestureDetector(
-          onTap: () {
+        leading: IconButton(
+          onPressed: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MyProductDetails()),
-              );
+              context,
+              MaterialPageRoute(builder: (context) =>  SellerHome()),
+            );
           },
-          child: ListView.builder(
-            itemCount: data.length,
-            itemBuilder: (context,index)
-            {
-              return Card(
-                color: bgColor,
-                child: ListTile(
-                
-                  title: Text(data[index].name),
-                  subtitle: Row(
-                    children: [
-                      const Icon(Icons.currency_rupee,size: 20,),
-                      Text(data[index].desc),
-                    ],
-                  ),
-                  leading: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: Image.asset(data[index].ImageUrl),
-                  ),
-                  trailing:  Text("Edit",
-                  style: GoogleFonts.inder(color:Colors.black45),),
-                ),
-              );
-            }
-            
-            ),
+          icon: const Icon(Icons.arrow_circle_left_outlined),
         ),
-      )
- 
+        title: Center(
+          child: Text("My Products", style: GoogleFonts.inder()),
+        ),
+        
+      ),
+      body: SafeArea(
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection("product")
+              .where("seller_id", isEqualTo: sellerId)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            }
+
+            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+              return Center(child: Text("No products found."));
+            }
+
+           var products = snapshot.data!.docs.map((doc) => ProductModel.fromMap(doc.data() as Map<String, dynamic>)).toList();
+            
+            return ListView.builder(
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                var product = products[index];
+                return GestureDetector(
+                  onTap: () {
+                    log(products[index].id.toString());
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProductDetailsPage(productId: products[index].id.toString())),
+                      
+                    );
+                  },
+                  child: Card(
+                    color: bgColor,
+                    child: ListTile(
+                      title: Text(product.pname),
+                       
+                      leading: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Image.network(product.imageUrl), // Use network image for better flexibility
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ),
     );
   }
-}
-
-class ProductList
-{
-  final String name,ImageUrl,desc;
-  ProductList(this.name,this.ImageUrl,this.desc);
 }

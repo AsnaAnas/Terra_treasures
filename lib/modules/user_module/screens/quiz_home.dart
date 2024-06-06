@@ -4,6 +4,7 @@ import 'package:terra_treasures/modules/user_module/screens/home.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class QuizHome extends StatelessWidget {
+  
   const QuizHome({super.key});
 
   @override
@@ -29,7 +30,7 @@ class QuizHome extends StatelessWidget {
         leading: IconButton(onPressed: (){
            Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                MaterialPageRoute(builder: (context) =>  HomeScreen()),
               );
         }, 
         icon: const Icon(Icons.arrow_circle_left_outlined,color: Colors.white,size: 30,)),

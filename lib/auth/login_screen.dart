@@ -10,6 +10,7 @@ import 'package:terra_treasures/util/custom_button.dart';
 //import 'package:terra_treasures/util/textfield.dart';
 
 class LoginScreen extends StatefulWidget {
+ 
   const LoginScreen({super.key});
 
   @override
@@ -38,7 +39,7 @@ login()async
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const OnboardingScreen(),
+              builder: (context) =>  OnboardingScreen(),
             ));
 
   }
@@ -209,7 +210,7 @@ on FirebaseAuthException catch (e) {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const RegisterPage()),
+                    MaterialPageRoute(builder: (context) =>  RegisterPage()),
                   );
                 },
                 child: Align(alignment:Alignment.centerRight,child:  Text("Sign Up",style: GoogleFonts.inder(fontSize:15,color:Colors.white))),

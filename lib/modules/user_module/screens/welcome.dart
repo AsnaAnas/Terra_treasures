@@ -14,6 +14,7 @@ import 'package:terra_treasures/modules/user_module/screens/home.dart';
 
 
 class WelcomeScreen extends StatelessWidget {
+
   const WelcomeScreen({super.key});
 
   

@@ -286,7 +286,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              MaterialPageRoute(builder: (context) =>  HomeScreen()),
             );
           },
           icon: const Icon(Icons.arrow_circle_left_outlined),
@@ -347,6 +347,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         width: 200,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(17),
+           
                           border: Border.all(color: Colors.black),
                         ),
                         child: TextButton(

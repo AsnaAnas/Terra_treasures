@@ -11,6 +11,7 @@ import 'package:terra_treasures/modules/user_module/screens/home.dart';
 import 'package:terra_treasures/util/custom_button.dart';
 
 class RegisterPage extends StatefulWidget {
+  
   const RegisterPage({super.key});
 
   @override
@@ -74,7 +75,7 @@ class _RegisterScreenState extends State<RegisterPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) =>  HomeScreen(),
           ),
         );
       } on FirebaseAuthException catch (e) {

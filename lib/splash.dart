@@ -7,6 +7,7 @@ import 'package:terra_treasures/modules/user_module/screens/home.dart';
 import 'package:terra_treasures/modules/user_module/screens/welcome.dart';
 
 class SplashScreen extends StatefulWidget {
+  
   const SplashScreen({super.key});
 
   @override
@@ -22,24 +23,24 @@ class _SplashScreenState extends State<SplashScreen> {
       // Navigate to the desired screen after the splash screen delay
        Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+                MaterialPageRoute(builder: (context) =>  WelcomeScreen()),
               );
     });
   }
 
-  check(BuildContext context)async{
-    SharedPreferences preferences=await SharedPreferences.getInstance();
-    String? name=preferences.getString('isloggin');
+  // check(BuildContext context)async{
+  //   SharedPreferences preferences=await SharedPreferences.getInstance();
+  //   String? name=preferences.getString('isloggin');
 
-    if(name!=null)
-    {
-       Navigator.push(context,MaterialPageRoute(builder: (context) =>  HomeScreen()) );
-    }
-    else
-    {
-      Navigator.push(context,MaterialPageRoute(builder: (context) =>  LoginScreen()) );
-    }
-  }
+  //   if(name!=null)
+  //   {
+  //      Navigator.push(context,MaterialPageRoute(builder: (context) =>  HomeScreen()) );
+  //   }
+  //   else
+  //   {
+  //     Navigator.push(context,MaterialPageRoute(builder: (context) =>  LoginScreen()) );
+  //   }
+  // }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(

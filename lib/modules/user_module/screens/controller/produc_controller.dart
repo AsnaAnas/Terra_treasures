@@ -1,10 +1,12 @@
 
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:terra_treasures/model/orderProduct.dart';
 import 'package:terra_treasures/model/product_model.dart';
 
 class ProductController {
@@ -34,6 +36,7 @@ class ProductController {
       'method': method,
       
     });
+    
      final id=FirebaseAuth.instance.currentUser!.uid;
     final productId=docRef.id;
     await docRef.update({'pid': productId,'seller_id':id});
@@ -77,4 +80,55 @@ class ProductController {
       return '';
     }
   }
+
+Future<List<OrderProductModel>> getOrdersByUserId(String userId) async {
+  // Fetch orders for the user
+  final orders = await FirebaseFirestore.instance
+      .collection('order')
+      .where('user_id', isEqualTo: userId)
+      .get();
+
+  // Create a list to hold OrderProductModel objects
+ 
+  List<OrderProductModel> orderProductModels = [];
+
+
+
+  // Loop through each order
+  for (var order in orders.docs) {
+    final orderId = order.id;
+    final productId = order['product_id']; 
+
+    // Fetch product details for the current order
+    final productSnapshot = await FirebaseFirestore.instance
+        .collection('product')
+        .doc(productId)
+        .get();
+
+    // Check if product exists
+    if (productSnapshot.exists) {
+      final productData = productSnapshot.data();
+      final productName = productData!['pname']; 
+      final productPrice = productData['price']; 
+      final imageUrl = productData['imageUrl']; 
+      // Create an OrderProductModel object and add it to the list
+      orderProductModels.add(
+        OrderProductModel(
+          orderId: orderId,
+          userId: userId,
+          productId: productId,
+          productName: productName,
+          price: productPrice,
+          imageUrl: imageUrl,
+        ),
+      );
+    } else {
+      print("Product with ID $productId not found for order $orderId");
+    }
+  }
+  print("=========hellooo======");
+ return orderProductModels;
+}
+
+
 }

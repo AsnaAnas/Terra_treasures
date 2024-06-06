@@ -10,7 +10,7 @@ import 'package:terra_treasures/util/constants.dart';
 
 class ProductsPage extends StatelessWidget {
   final String category;
-
+ // final String productId;
   ProductsPage({super.key, required this.category});
 
   @override
@@ -25,7 +25,7 @@ class ProductsPage extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              MaterialPageRoute(builder: (context) =>  HomeScreen()),
             );
           },
           icon: const Icon(Icons.arrow_circle_left_outlined),
@@ -40,7 +40,7 @@ class ProductsPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const CartPage()),
+                  MaterialPageRoute(builder: (context) =>  CartPage()),
                 );
               },
               icon: const Icon(Icons.shopping_bag_outlined),

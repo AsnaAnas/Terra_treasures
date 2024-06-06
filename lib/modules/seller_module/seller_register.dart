@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:terra_treasures/model/seller_model.dart';
+import 'package:terra_treasures/modules/seller_module/seller_home.dart';
 import 'package:terra_treasures/modules/seller_module/sellercontroller/seller_controller.dart';
 import 'package:terra_treasures/modules/user_module/screens/home.dart';
 import 'package:terra_treasures/util/custom_button.dart';
@@ -81,7 +82,7 @@ class _RegisterScreenState extends State<SellerRegisterPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) =>  SellerHome(),
           ),
         );
       } on FirebaseAuthException catch (e) {

@@ -3,9 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:terra_treasures/auth/login_screen.dart';
+import 'package:terra_treasures/modules/auth_screens/seller_login.dart';
 import 'package:terra_treasures/modules/seller_module/seller_profile.dart';
-import 'package:terra_treasures/modules/user_module/screens/profile.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class SellerSettingsPage extends StatelessWidget {
@@ -25,7 +24,7 @@ class SellerSettingsPage extends StatelessWidget {
         leading:  IconButton(onPressed: (){
            Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
+                MaterialPageRoute(builder: (context) => const SellerProfile()),
               );
         },
          icon: const Icon(Icons.arrow_circle_left_outlined))
@@ -150,7 +149,7 @@ class SellerSettingsPage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () async {
                     SharedPreferences preferences = await SharedPreferences.getInstance();
-                    _auth.signOut().then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()))); // Use pushReplacement here
+                    _auth.signOut().then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SellerLogin()))); // Use pushReplacement here
                     preferences.clear();
                     // log('logout successfully' as num);
 

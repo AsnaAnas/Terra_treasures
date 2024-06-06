@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:terra_treasures/modules/seller_module/seller_home.dart';
+import 'package:terra_treasures/modules/seller_module/seller_profile.dart';
 import 'package:terra_treasures/modules/user_module/screens/cartpage.dart';
 import 'package:terra_treasures/modules/user_module/screens/community_start.dart';
 import 'package:terra_treasures/modules/user_module/screens/education.dart';
@@ -15,6 +16,7 @@ import 'package:terra_treasures/modules/user_module/screens/profile.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class SellerEditProfile extends StatefulWidget {
+  
    SellerEditProfile({super.key});
 
   @override
@@ -49,7 +51,7 @@ class _EditProfileState extends State<SellerEditProfile> {
         leading: IconButton(onPressed: (){
           Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
+                MaterialPageRoute(builder: (context) => const SellerProfile()),
               );
         }, 
         icon: const Icon(Icons.arrow_circle_left_outlined)),
@@ -187,19 +189,19 @@ class _EditProfileState extends State<SellerEditProfile> {
               FloatingCenterButtonChild(
                 child: const Icon(Icons.school,color: kPrimaryColor,),
                 onTap: () {
-                  Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const EducationContent()),
-              );
+              //     Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) =>  EducationContent()),
+              // );
                 },
                 ),
                 FloatingCenterButtonChild(
                 child: const Icon(Icons.shopping_bag_outlined,color:kPrimaryColor),
                 onTap: () {
-                  Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CartPage()),
-              );
+              //     Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const CartPage()),
+              // );
                 },
                 ),
                 FloatingCenterButtonChild(
@@ -235,10 +237,10 @@ class _EditProfileState extends State<SellerEditProfile> {
                  titleStyle:const TextStyle(color: AppColors.white),
                  dotColor: Colors.white,
                  onTap: (value) {
-                   Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CommunityStart()),
-              );
+              //      Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const CommunityStart()),
+              // );
                  },
                  )
                  

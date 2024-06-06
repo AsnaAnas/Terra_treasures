@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/modules/seller_module/seller_home.dart';
 import 'package:terra_treasures/modules/user_module/screens/home.dart';
 import 'package:terra_treasures/util/constants.dart';
 
-class NotificationPage extends StatelessWidget {
+class SellerNotificationPage extends StatelessWidget {
   
-   NotificationPage({super.key});
+   SellerNotificationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class NotificationPage extends StatelessWidget {
         leading: IconButton(onPressed: (){
            Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  HomeScreen()),
+                MaterialPageRoute(builder: (context) =>  SellerHome()),
               );
         },
          icon: const Icon(Icons.arrow_circle_left_outlined,color: Colors.white,)),

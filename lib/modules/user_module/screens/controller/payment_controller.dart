@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:upi_india/upi_india.dart';
 
 class PaymentController with ChangeNotifier {
+  final db = FirebaseFirestore.instance;
   UpiIndia _upiIndia = UpiIndia();
   UpiApp app = UpiApp.googlePay;
 
@@ -44,4 +46,23 @@ class PaymentController with ChangeNotifier {
       print('Error initiating transaction: $e');
     }
   }
+
+
+   Future<String> create(
+    String productId,
+    String userId,
+    double price,
+    String paymentMethod,
+  ) async {
+    final collectionRef = db.collection('payment');
+    final docRef = await collectionRef.add({
+      'product_id': productId,
+      'user_id': userId,
+      'price': price,
+      'payment_method':paymentMethod
+    });
+     final orderId = docRef.id;
+    await docRef.update({'id': orderId, 'user_id': userId});
+    return orderId;
+}
 }

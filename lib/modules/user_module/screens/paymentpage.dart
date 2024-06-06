@@ -15,7 +15,7 @@ class PaymentPage extends StatefulWidget {
   final int quantity;
 
   //PaymentPage({super.key, required this.productId, required int quantity});
-  
+
   PaymentPage({Key? key, required this.productId, required this.quantity})
       : super(key: key);
 
@@ -33,7 +33,7 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   Future<ProductModel> _fetchProductDetails(String productId) async {
-     DocumentSnapshot doc = await FirebaseFirestore.instance
+    DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection('product')
         .doc(productId)
         .get();
@@ -43,21 +43,22 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     final AddressController addressController = AddressController();
-    final String userId = FirebaseAuth.instance.currentUser!.uid;
+    // final String userId = FirebaseAuth.instance.currentUser!.uid;
 
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
         backgroundColor: bgColor,
         leading: IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const CartPage()),
-            );
-          },
-          icon: const Icon(Icons.arrow_circle_left_outlined),
-        ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CartPage()),
+                  );
+                },
+                icon: const Icon(Icons.arrow_circle_left_outlined),
+              ),
+           
         title: const Text("Payment"),
         centerTitle: true,
       ),
@@ -177,7 +178,8 @@ class _PaymentPageState extends State<PaymentPage> {
                             child: Text(
                               "CHANGE",
                               style: GoogleFonts.inder(
-                                  color: kPrimaryColor, fontWeight: FontWeight.w800),
+                                  color: kPrimaryColor,
+                                  fontWeight: FontWeight.w800),
                             ),
                           ),
                         ),
@@ -203,7 +205,8 @@ class _PaymentPageState extends State<PaymentPage> {
                   } else if (!snapshot.hasData || !snapshot.data!.exists) {
                     return const Center(child: Text('Product not found'));
                   } else {
-                    var productData = snapshot.data!.data() as Map<String, dynamic>;
+                    var productData =
+                        snapshot.data!.data() as Map<String, dynamic>;
                     return Padding(
                       padding: const EdgeInsets.only(left: 50, right: 30),
                       child: Row(
@@ -242,7 +245,8 @@ class _PaymentPageState extends State<PaymentPage> {
                                     Icon(Icons.star, color: Colors.amber),
                                     Icon(Icons.star, color: Colors.amber),
                                     Icon(Icons.star,
-                                        color: Color.fromARGB(255, 213, 213, 213)),
+                                        color:
+                                            Color.fromARGB(255, 213, 213, 213)),
                                   ],
                                 ),
                               ],
@@ -271,7 +275,9 @@ class _PaymentPageState extends State<PaymentPage> {
                   } else if (!snapshot.hasData || !snapshot.data!.exists) {
                     return const Center(child: Text('Product not found'));
                   } else {
-                    var productData = snapshot.data!.data() as Map<String, dynamic>;
+                    var productData =
+                        snapshot.data!.data() as Map<String, dynamic>;
+                    double price = productData['price'] * widget.quantity;
                     return Padding(
                       padding: const EdgeInsets.all(15),
                       child: Column(
@@ -291,7 +297,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                 children: [
                                   const Icon(Icons.currency_rupee, size: 20),
                                   Text(
-                                    productData['price'].toString(),
+                                    price.toString(),
                                     style: GoogleFonts.inder(),
                                   ),
                                 ],
@@ -308,7 +314,8 @@ class _PaymentPageState extends State<PaymentPage> {
                               Text(
                                 "FREE",
                                 style: GoogleFonts.inder(
-                                    fontSize: 16, color: const Color(0xff34A853)),
+                                    fontSize: 16,
+                                    color: const Color(0xff34A853)),
                               ),
                             ],
                           ),
@@ -330,9 +337,8 @@ class _PaymentPageState extends State<PaymentPage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => OrderSummary(
-                                productId: widget.productId,
-                                quantity:widget.quantity
-                              )),
+                              productId: widget.productId,
+                              quantity: widget.quantity)),
                     );
                   },
                   child: Text(

@@ -14,18 +14,18 @@ class QuizFinish extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         leading: IconButton(onPressed: (){
-          Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const QuizHome()),
-              );
+          // Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => const QuizHome()),
+          //     );
         }, 
         icon: const Icon(Icons.arrow_circle_left_outlined,color: Colors.white,size: 30,)),
         actions:  [
          IconButton(onPressed: (){
-          Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const QuizHome()),
-              );
+          // Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => const QuizHome()),
+          //     );
          }, icon: const Icon(Icons.close,color: Colors.white,))
         ],
       ),
@@ -128,10 +128,10 @@ class QuizFinish extends StatelessWidget {
                         backgroundColor: kPrimaryColor
                       ),
                       onPressed: (){
-                        Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
-              );
+              //           Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const ProfilePage()),
+              // );
                       }, 
                     child: Text("Check Your Points",style: GoogleFonts.inder(color:Colors.white,fontSize:16),))
                   ],

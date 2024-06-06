@@ -1,10 +1,5 @@
 // import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
-
-
-
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
@@ -17,12 +12,13 @@ import 'package:terra_treasures/modules/user_module/screens/moreinfo.dart';
 import 'package:terra_treasures/modules/user_module/screens/notification.dart';
 import 'package:terra_treasures/modules/user_module/screens/product.dart';
 import 'package:terra_treasures/modules/user_module/screens/profile.dart';
-import 'package:terra_treasures/modules/user_module/screens/quiz_home.dart';
+import 'package:terra_treasures/modules/user_module/screens/search_page.dart';
 import 'package:terra_treasures/modules/user_module/screens/sustain.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  
+  const HomeScreen({super.key,});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -55,7 +51,7 @@ File? selectedImage;
               onTap: (){
                  Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
+                MaterialPageRoute(builder: (context) =>  ProfilePage()),
               );
               },
               child: Padding(
@@ -70,41 +66,22 @@ File? selectedImage;
            }
            ),
           
-        // IconButton(onPressed: (){
-         
-        //    Navigator.push(
-        //         context,
-        //         MaterialPageRoute(builder: (context) => const ProfilePage()),
-        //       );
-        // }, icon: const Icon(Icons.account_circle,size: 50,)),
         title:  Padding(
           padding: const EdgeInsets.only(top: 15),
-          // child: StreamBuilder(stream: _firestor.collection('register').doc(id).snapshots(),
-          //  builder: (context, snapshot) {
-          //   log(snapshot.data!.data()!.toString());
-          //   log("Helloooooo");
-            
-          //   UserModel userModel=UserModel.fromData(snapshot.data!.data()!);
-            
-          //   return Column(
-          //   children: [
-          //     // Text(
-          //     //   userModel.name,style: GoogleFonts.inder(),),
-            child:   Column(
+          child:   Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 StreamBuilder(stream:_firestor.collection("register").doc(id).snapshots(), 
                 
                 builder: (context, snapshot){
-
-                   UserModel userModel=UserModel.fromMap(snapshot.data!.data()!);
-                  //  if(snapshot.connectionState == ConnectionState.waiting)
-                  //  {
-                  //   const Center(child: CircularProgressIndicator(),);
-                  //  }
-                  return   Text(
-                  userModel.name,
-                  
-                  style: GoogleFonts.inder(),);
+                  UserModel userModel=UserModel.fromMap(snapshot.data!.data()!);
+                 return  Row(
+                  children: [
+                    Text("Hi,",style: GoogleFonts.inder(),),
+                    Text( userModel.name, style: GoogleFonts.inder(),)
+                  ],
+                 );
+                 
                 },),
                 Text("Welcome Back!",style: GoogleFonts.inder(color:Colors.grey,fontSize:16),),
               ],
@@ -118,9 +95,16 @@ File? selectedImage;
              
              Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const NotificationPage()),
+                MaterialPageRoute(builder: (context) =>  NotificationPage()),
               );
-          }, icon: const Icon(Icons.notifications_none_outlined))
+          }, icon: const Icon(Icons.notifications_none_outlined)),
+          IconButton(onPressed: (){
+             
+             Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  SearchPage()),
+              );
+          }, icon: const Icon(Icons.search)),
         ],
 
       ),
@@ -132,25 +116,8 @@ File? selectedImage;
           Column(
         
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30,left: 30,right: 30),
-            child: TextFormField(
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(10),
-                border: OutlineInputBorder(
-                  //borderSide: const BorderSide(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(17)
-
-                ),
-                
-                fillColor: Colors.white,
-                filled: true,
-                prefixIcon: const Icon(Icons.search),
-                hintText: "Search",
-                hintStyle: const TextStyle(color: Colors.grey)
-              )
-            ),
-          ),
+        
+          
         Container(
           height: 200,
           width: double.maxFinite,
@@ -180,7 +147,7 @@ File? selectedImage;
                   onPressed: (){
                     Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const MoreInfo()),
+                MaterialPageRoute(builder: (context) =>  MoreInfo()),
               );
                   }, 
                   child: Text("More Information",style: GoogleFonts.inder(color:Colors.black,fontSize:11),))
@@ -208,68 +175,7 @@ File? selectedImage;
                 color:Colors.white,
                 borderRadius: BorderRadius.circular(10),
             ),
-            
-            // child: ListView(
-            //   scrollDirection: Axis.horizontal,
-            //   children: [
-            //     GestureDetector(
-            //       onTap: () {
-            //         Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => ProductsPage()),
-            //   );
-            //       },
-            //       child: Column(
-            //         children: [
-            //           Padding(
-            //             padding: const EdgeInsets.all(8.0),
-            //             child: Image.asset("assets/kitchen.png"),
-            //           ),
-            //           Text("Kitchen",style: GoogleFonts.inder(),),
-            //         ],
-            //       ),
-            //     ),
-            //     Column(
-            //       children: [
-            //         Padding(
-            //           padding: const EdgeInsets.all(8.0),
-            //           child: Image.asset("assets/home.png"),
-            //         ),
-            //         Text("Home",style: GoogleFonts.inder(),),
-            //       ],
-            //     ),
-                
-            //     Column(
-            //       children: [
-            //         Padding(
-            //           padding: const EdgeInsets.all(8.0),
-            //           child: Image.asset("assets/fashion.png"),
-            //         ),
-            //         Text("Fashion",style: GoogleFonts.inder(),),
-            //       ],
-            //     ),
-            //     Column(
-            //       children: [
-            //         Padding(
-            //           padding: const EdgeInsets.all(8.0),
-            //           child: Image.asset("assets/kitchen.png"),
-            //         ),
-            //         Text("Kitchen",style: GoogleFonts.inder(),),
-            //       ],
-            //     ),
-            //     Column(
-            //       children: [
-            //         Padding(
-            //           padding: const EdgeInsets.all(8.0),
-            //           child: Image.asset("assets/kitchen.png"),
-            //         ),
-            //         Text("Kitchen",style: GoogleFonts.inder(),),
-            //       ],
-            //     ),
-
-            //   ],
-            // ),
-
+ 
             child: ListView(
   scrollDirection: Axis.horizontal,
   children: [
@@ -324,7 +230,7 @@ File? selectedImage;
         ],
       ),
     ),
-    // Add more categories similarly
+   
   ],
 ),
             
@@ -343,7 +249,7 @@ File? selectedImage;
             onTap: () {
                Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Sustainability()),);
+                MaterialPageRoute(builder: (context) =>  Sustainability()),);
             },
             child: Image.asset('assets/sustainability.png')),
         ),
@@ -367,48 +273,7 @@ File? selectedImage;
 
         ),
 
-        // bottomNavigationBar: CurvedNavigationBar(
-        //   index: 0,
-        //   color: kPrimaryColor,
-        //   backgroundColor: Colors.transparent,
-        //   buttonBackgroundColor: kPrimaryColor,
-        //   items: const [
-        //     Icon(Icons.home,color: Colors.white,),
-        //     Icon(Icons.move_down_rounded,color: Colors.white,),
-        //     Icon(Icons.people_alt,color: Colors.white,)
-        //   ]),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // bottomNavigationBar:BottomAppBar(
-        //   shape: const CircularNotchedRectangle(),
-        //   notchMargin: 10,
-        //   child: Container(
-        //     height: 60,
-        //     child:  Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       children: [
-        //         Row(
-        //           crossAxisAlignment: CrossAxisAlignment.start,
-        //           children: [
-        //              MaterialButton(
-        //               minWidth: 40,
-        //               onPressed: (){
-        //                 setState(() {
-                          
-        //                 });
-        //               },
-        //               child: Column(
-        //                 mainAxisAlignment: MainAxisAlignment.center,
-        //                 children: [
-        //                   Icon(Icons.home)
-        //                 ],
-        //               ),
-        //               )
-        //           ],
-        //         )
-        //       ],
-        //     ),
-        //   ),
-        // )
+
         bottomNavigationBar:  AnimatedBottomNavigationBar(
           barColor: kPrimaryColor,
           bottomBarCenterModel: BottomBarCenterModel(
@@ -421,7 +286,7 @@ File? selectedImage;
                 onTap: () {
                   Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const EducationContent()),
+                MaterialPageRoute(builder: (context) =>  EducationContent()),
               );
                 },
                 ),
@@ -430,17 +295,17 @@ File? selectedImage;
                 onTap: () {
                   Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CartPage()),
+                MaterialPageRoute(builder: (context) =>  CartPage()),
               );
                 },
                 ),
                 FloatingCenterButtonChild(
                 child: const Icon(Icons.quiz,color: kPrimaryColor,),
                 onTap: () {
-                  Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const QuizHome()),
-              );
+              //     Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const QuizHome()),
+              // );
                 },
                 ),
                 FloatingCenterButtonChild(
@@ -451,7 +316,7 @@ File? selectedImage;
                 )
 
             ]), 
-          bottomBar: const [
+          bottomBar:  [
               BottomBarItem(
                 icon: Icon(Icons.home,color: Colors.white,),
                  iconSelected: Icon(Icons.home),title: "Home",
@@ -459,7 +324,15 @@ File? selectedImage;
                  dotColor: Colors.white
                  ),
                  BottomBarItem(
-                icon: Icon(Icons.people_alt,color: Colors.white,),
+                icon: GestureDetector
+                (
+                  onTap: () {
+              //        Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const CommunityStart()),
+              // );
+                  },
+                  child: Icon(Icons.people_alt,color: Colors.white,)),
                  iconSelected: Icon(Icons.people_alt),title: "Community",
                  titleStyle:TextStyle(color: AppColors.white),
                  dotColor: Colors.white)  

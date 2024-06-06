@@ -51,6 +51,15 @@ class _AddProductPageState extends State<AddProductPage> {
     Colors.white,
   ];
 
+ 
+    Future<void> _pickedImageGallery() async {
+      final pickedImage =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (pickedImage == null) return;
+      setState(() {
+        selectedImage = File(pickedImage.path);
+      });
+    }
 
 
   @override
@@ -79,22 +88,32 @@ class _AddProductPageState extends State<AddProductPage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 40, right: 200),
-              child: Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.black26),
-                  borderRadius: BorderRadius.circular(17),
-                ),
-                child: Positioned(
-                  child: IconButton(
-                      onPressed: () {
-                        showImagePickerOption(context);
-                      },
-                      icon: const Icon(Icons.camera_alt_outlined)),
-                ),
-              ),
+               child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage: selectedImage != null
+                          ? FileImage(selectedImage!)
+                          : const AssetImage("assets/product.png") as ImageProvider,
+                      child: IconButton(
+                        onPressed: _pickedImageGallery,
+                        icon: const Icon(Icons.camera_alt),
+                      ),
+                    ),
+              // Container(
+              //   height: 80,
+              //   width: 80,
+              //   decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     border: Border.all(color: Colors.black26),
+              //     borderRadius: BorderRadius.circular(17),
+              //   ),
+              //   child: Positioned(
+              //     child: IconButton(
+              //         onPressed: () {
+              //           showImagePickerOption(context);
+              //         },
+              //         icon: const Icon(Icons.camera_alt_outlined)),
+              //   ),
+              // ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 40, right: 30, left: 30),
@@ -314,92 +333,8 @@ class _AddProductPageState extends State<AddProductPage> {
     );
   }
 
-  void showImagePickerOption(BuildContext context) {
-    Future<void> _pickedImageGallery() async {
-      final pickedImage =
-          await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (pickedImage == null) return;
-      setState(() {
-        selectedImage = File(pickedImage.path);
-      });
-    }
+  
     
-
-    Future<void> _pickedImageCamera() async {
-      final pickedImage =
-          await ImagePicker().pickImage(source: ImageSource.camera);
-      if (pickedImage == null) return;
-      setState(() {
-        selectedImage = File(pickedImage.path);
-      });
-    }
-
-    showModalBottomSheet(
-        context: context,
-        builder: (builder) {
-          return Padding(
-            padding: const EdgeInsets.only(
-              top: 50,
-            ),
-            child: SizedBox(
-              height: 200,
-              width: 500,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {},
-                      child: SizedBox(
-                        child: Column(
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  _pickedImageGallery();
-                                },
-                                icon: const Icon(
-                                  Icons.image,
-                                  size: 50,
-                                )),
-                            //const Icon(Icons.image,size: 50,),
-                            Text(
-                              "Gallery",
-                              style: GoogleFonts.inder(),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {},
-                      child: SizedBox(
-                        child: Column(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                _pickedImageCamera();
-                              },
-                              icon: const Icon(
-                                Icons.camera_alt,
-                                size: 50,
-                              ),
-                            ),
-                            // const Icon(Icons.camera_alt,size: 50,),
-                            Text(
-                              "Camera",
-                              style: GoogleFonts.inder(),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-  }
+  
 }
  

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class ProductModel
 {
  String pname;
@@ -57,6 +58,8 @@ ProductModel({
     );
   }
 
+ 
+ 
 
   factory ProductModel.fromDocument(DocumentSnapshot doc) {
     return ProductModel(

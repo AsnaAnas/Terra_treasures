@@ -17,6 +17,7 @@ import 'package:terra_treasures/modules/user_module/screens/settings.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class ProfilePage extends StatefulWidget {
+  
   const ProfilePage({super.key});
 
   @override
@@ -30,6 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     // String id=_auth.currentUser!.uid;
+    //String productId = widget.productId;
     String? id; 
 if (_auth.currentUser != null) {
   id = _auth.currentUser!.uid;
@@ -41,7 +43,7 @@ if (_auth.currentUser != null) {
         leading: IconButton(onPressed: (){
          Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                MaterialPageRoute(builder: (context) =>  HomeScreen()),
               );
         }, 
         icon: const Icon(Icons.arrow_circle_left_outlined)),
@@ -219,9 +221,10 @@ if (_auth.currentUser != null) {
                                   fontSize:18,
                                 ),),
                             IconButton(onPressed: (){
+                              
                               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const MyOrderPage()),
+                MaterialPageRoute(builder: (context) =>  MyOrderPage()),
               );
                             }, icon: const Icon(Icons.arrow_forward_ios_rounded))
                         ],
@@ -274,7 +277,7 @@ if (_auth.currentUser != null) {
                 onTap: () {
                   Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const EducationContent()),
+                MaterialPageRoute(builder: (context) =>  EducationContent()),
               );
                 },
                 ),
@@ -283,7 +286,7 @@ if (_auth.currentUser != null) {
                 onTap: () {
                   Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CartPage()),
+                MaterialPageRoute(builder: (context) =>  CartPage()),
               );
                 },
                 ),

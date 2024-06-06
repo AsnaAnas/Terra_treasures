@@ -6,14 +6,11 @@ import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:terra_treasures/auth/login_screen.dart';
 import 'package:terra_treasures/model/seller_model.dart';
+import 'package:terra_treasures/modules/auth_screens/seller_login.dart';
 import 'package:terra_treasures/modules/seller_module/seller_editprofile.dart';
+import 'package:terra_treasures/modules/seller_module/seller_home.dart';
 import 'package:terra_treasures/modules/seller_module/seller_settings.dart';
-import 'package:terra_treasures/modules/user_module/screens/cartpage.dart';
-import 'package:terra_treasures/modules/user_module/screens/education.dart';
-import 'package:terra_treasures/modules/user_module/screens/home.dart';
-import 'package:terra_treasures/modules/user_module/screens/order.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class SellerProfile extends StatefulWidget {
@@ -41,7 +38,7 @@ if (_auth.currentUser != null) {
         leading: IconButton(onPressed: (){
          Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                MaterialPageRoute(builder: (context) =>  SellerHome()),
               );
         }, 
         icon: const Icon(Icons.arrow_circle_left_outlined)),
@@ -213,10 +210,10 @@ if (_auth.currentUser != null) {
                                   fontSize:18,
                                 ),),
                             IconButton(onPressed: (){
-                              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MyOrderPage()),
-              );
+              //                 Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const MyOrderPage()),
+              // );
                             }, icon: const Icon(Icons.arrow_forward_ios_rounded))
                         ],
                        ),
@@ -261,19 +258,19 @@ if (_auth.currentUser != null) {
               FloatingCenterButtonChild(
                 child: const Icon(Icons.school,color: kPrimaryColor,),
                 onTap: () {
-                  Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const EducationContent()),
-              );
+              //     Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) =>  EducationContent()),
+              // );
                 },
                 ),
                 FloatingCenterButtonChild(
                 child: const Icon(Icons.shopping_bag_outlined,color:kPrimaryColor),
                 onTap: () {
-                  Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CartPage()),
-              );
+              //     Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const CartPage()),
+              // );
                 },
                 ),
                 FloatingCenterButtonChild(
@@ -327,7 +324,7 @@ if (_auth.currentUser != null) {
                 ElevatedButton(
                   onPressed: () async {
                     SharedPreferences preferences = await SharedPreferences.getInstance();
-                    _auth.signOut().then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()))); // Use pushReplacement here
+                    _auth.signOut().then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SellerLogin()))); // Use pushReplacement here
                     preferences.clear();
                     // log('logout successfully' as num);
 

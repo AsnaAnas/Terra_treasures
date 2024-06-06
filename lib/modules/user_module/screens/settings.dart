@@ -9,14 +9,17 @@ import 'package:terra_treasures/modules/user_module/screens/profile.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class SettingsPage extends StatelessWidget {
-   SettingsPage({super.key});
+  
+   //SettingsPage({super.key,required this.productId});
+   SettingsPage({Key? key}) : super(key: key);
+
 
   final _firestor=FirebaseFirestore.instance;
   final _auth=FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
-
+   // String productId = widget.productId;
     String id=_auth.currentUser!.uid;
     return Scaffold(
       backgroundColor: bgColor,
@@ -25,7 +28,7 @@ class SettingsPage extends StatelessWidget {
         leading:  IconButton(onPressed: (){
            Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
+                MaterialPageRoute(builder: (context) =>  ProfilePage()),
               );
         },
          icon: const Icon(Icons.arrow_circle_left_outlined))
@@ -60,7 +63,7 @@ class SettingsPage extends StatelessWidget {
             trailing: IconButton(onPressed: (){
                Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
+                MaterialPageRoute(builder: (context) =>  ProfilePage()),
               );
             },
              icon: const Icon(Icons.arrow_forward_ios)),
