@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/modules/admin/admin_home.dart';
 import 'package:terra_treasures/util/constants.dart';
 
 class AdminLogin extends StatefulWidget {
@@ -82,7 +83,12 @@ class _AdminLoginState extends State<AdminLogin> {
                   const SizedBox(
                     height: 40,
                   ),
-                  ElevatedButton(onPressed: (){},
+                  ElevatedButton(onPressed: (){
+                    Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>  const AdminHome()),
+            );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kPrimaryColor,
                     fixedSize: const Size(200, 45)

@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:terra_treasures/modules/admin/view_buyer.dart';
+import 'package:terra_treasures/modules/admin/view_seller.dart';
+import 'package:terra_treasures/util/constants.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({super.key});
@@ -47,26 +50,69 @@ class _AdminHomeState extends State<AdminHome> {
                       "Terra Treasure",
                       style: GoogleFonts.philosopher(fontSize: 22),
                     ),
-                    actions: const [
+                    actions: [
                       Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text("Home"),
+                        padding: const EdgeInsets.all(10),
+                        child: Container(
+                            width: 60,
+                            height: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: kPrimaryColor,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Home",
+                                style: GoogleFonts.inder(color: Colors.white),
+                              ),
+                            )),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text("View Buyer"),
+                        padding: const EdgeInsets.all(10),
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ViewBuyer()),
+                              );
+                            },
+                            child: Text(
+                              "View Buyer",
+                              style: GoogleFonts.inder(),
+                            )),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text("View Seller"),
+                        padding: const EdgeInsets.all(10),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ViewSeller()),
+                              );
+                          },
+                          child: Text(
+                            "View Seller",
+                            style: GoogleFonts.inder(),
+                          ),
+                        ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text("Add quiz"),
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          "Add quiz",
+                          style: GoogleFonts.inder(),
+                        ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text("Logout"),
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          "Logout",
+                          style: GoogleFonts.inder(),
+                        ),
                       ),
                     ],
                   ),
@@ -75,32 +121,41 @@ class _AdminHomeState extends State<AdminHome> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          width: 300,
-                          height: 200,
-                          decoration: const BoxDecoration(
-                            // image: DecorationImage(
-                            //   image: AssetImage("assets/earth.jpg"),
-                             
-                            // ),
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Container(
+                            width: 250,
+                            height: 300,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage("assets/earth_bg.png"),
+                                  fit: BoxFit.fill),
+                            ),
+                            // child: Image.asset("assets/earth_bg.png"),
                           ),
-                          child: Image.asset("assets/earth.png"),
                         ),
-                       
                         Column(
                           children: [
-                            Text("The Importance of Sustainable \n and Eco-Friendly Products ",
-                            style: GoogleFonts.inter(fontSize:24,fontWeight:FontWeight.bold),),
-                            const SizedBox(height: 20,),
+                            Text(
+                              "The Importance of Sustainable \n and Eco-Friendly Products ",
+                              style: GoogleFonts.inter(
+                                  fontSize: 24, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 20,),
-                              child: Text("Embracing eco-friendly materials offers a range of advantages. \n These materials are designed to minimize\n harm to the environment as they are often made from \n renewable resources, requiring less energy and water during production.\n They also emit fewer greenhouse gases and\n pollutants compared to conventional materials.",
-                              style: GoogleFonts.inter(),),
+                              padding: const EdgeInsets.only(
+                                left: 20,
+                              ),
+                              child: Text(
+                                "Embracing eco-friendly materials offers a range of advantages. \n These materials are designed to minimize\n harm to the environment as they are often made from \n renewable resources, requiring less energy and water during production.\n They also emit fewer greenhouse gases and\n pollutants compared to conventional materials.",
+                                style: GoogleFonts.inter(),
+                              ),
                             )
                           ],
                         )
                       ],
-                    
                     ),
                   )
                 ],
