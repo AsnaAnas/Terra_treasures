@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:terra_treasures/modules/admin/add_quiz.dart';
+import 'package:terra_treasures/modules/admin/admin_page.dart';
 import 'package:terra_treasures/modules/admin/view_buyer.dart';
 import 'package:terra_treasures/modules/admin/view_seller.dart';
 import 'package:terra_treasures/util/constants.dart';
@@ -100,18 +104,32 @@ class _AdminHomeState extends State<AdminHome> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          "Add quiz",
-                          style: GoogleFonts.inder(),
+                      InkWell(
+                        onTap: () {
+                           Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AddQuiz()),
+                              );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Add quiz",
+                            style: GoogleFonts.inder(),
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          "Logout",
-                          style: GoogleFonts.inder(),
+                      InkWell(
+                        onTap: () {
+                          _showLogoutBottomSheet(context);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Logout",
+                            style: GoogleFonts.inder(),
+                          ),
                         ),
                       ),
                     ],
@@ -166,4 +184,53 @@ class _AdminHomeState extends State<AdminHome> {
       ),
     );
   }
+
+
+    void _showLogoutBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 100,),
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.3,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Are you sure you want to logout?',
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () async {
+                      SharedPreferences preferences = await SharedPreferences.getInstance();
+                      FirebaseAuth.instance.signOut().then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AdminLogin()))); // Use pushReplacement here
+                      preferences.clear();
+                      // log('logout successfully' as num);
+        
+                     
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Logout'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Cancel'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
 }

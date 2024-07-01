@@ -7,6 +7,7 @@ class QuizModel
   String option2;
   String option3;
   String option4;
+  String correct;
 
   QuizModel({
     required this.category,
@@ -15,6 +16,7 @@ class QuizModel
     required this.option2,
     required this.option3,
     required this.option4,
+    required this.correct,
     this.qstnid,
 
   });
@@ -26,7 +28,8 @@ class QuizModel
         "option2": option2,
          "option3": option3,
          "option4":option4,
-         "category":category
+         "category":category,
+         "correct_answer":correct,
          
       };
 
@@ -38,7 +41,8 @@ class QuizModel
       option2: data["option2"],
       option3: data["option3"],
       option4: data["option4"],
-      category: data["category"]
+      category: data["category"],
+      correct:data["correct_answer"],
     );
   }
 

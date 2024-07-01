@@ -12,6 +12,7 @@ import 'package:terra_treasures/modules/user_module/screens/moreinfo.dart';
 import 'package:terra_treasures/modules/user_module/screens/notification.dart';
 import 'package:terra_treasures/modules/user_module/screens/product.dart';
 import 'package:terra_treasures/modules/user_module/screens/profile.dart';
+import 'package:terra_treasures/modules/user_module/screens/quiz_home.dart';
 import 'package:terra_treasures/modules/user_module/screens/search_page.dart';
 import 'package:terra_treasures/modules/user_module/screens/sustain.dart';
 import 'package:terra_treasures/util/constants.dart';
@@ -302,10 +303,10 @@ File? selectedImage;
                 FloatingCenterButtonChild(
                 child: const Icon(Icons.quiz,color: kPrimaryColor,),
                 onTap: () {
-              //     Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const QuizHome()),
-              // );
+                  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const QuizHome()),
+              );
                 },
                 ),
                 FloatingCenterButtonChild(

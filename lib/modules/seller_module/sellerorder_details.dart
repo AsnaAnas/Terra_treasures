@@ -294,7 +294,7 @@ class _SellerOrderDetailsState extends State<SellerOrderDetails> {
                                       color: Colors.black, fontSize: 16)),
                               Text(user.email,
                                   style: GoogleFonts.inder(
-                                      color: Colors.black, fontSize: 16)),
+                                      color: Colors.black, fontSize: 12)),
                             ],
                           ),
                         ),
@@ -399,7 +399,7 @@ class _SellerOrderDetailsState extends State<SellerOrderDetails> {
                               }
                             }),
                         const SizedBox(
-                          height: 40,
+                          height: 30,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(

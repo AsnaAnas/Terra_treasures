@@ -75,9 +75,10 @@ class _AdminLoginState extends State<AdminLogin> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           filled: true,
-                          fillColor: Colors.white
+                          fillColor: Colors.white,
+                          
                         ),
-                        
+                        obscureText: true,
                       ),
                   ),
                   const SizedBox(

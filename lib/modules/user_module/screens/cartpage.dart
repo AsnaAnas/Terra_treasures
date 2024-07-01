@@ -564,31 +564,31 @@ double totalPrice = 0;
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Total Payment",
-                        style: GoogleFonts.inder(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          const Icon(Icons.currency_rupee, size: 20),
-                          Text(
-                           // totalPrice.toString(), 
-                           "total price",
-                            style: GoogleFonts.inder(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  // child: Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       "Total Payment",
+                  //       style: GoogleFonts.inder(
+                  //         fontSize: 16,
+                  //         fontWeight: FontWeight.w500,
+                  //       ),
+                  //     ),
+                  //     Row(
+                  //       children: [
+                  //         const Icon(Icons.currency_rupee, size: 20),
+                  //         Text(
+                  //          // totalPrice.toString(), 
+                  //          "total price",
+                  //           style: GoogleFonts.inder(
+                  //             fontSize: 16,
+                  //             fontWeight: FontWeight.w500,
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // ),
                 ),
                 const SizedBox(height: 80),
                 ElevatedButton(
@@ -606,15 +606,15 @@ double totalPrice = 0;
                     child: Row(
                       children: [
                         Text(
-                          "Make Payment | ",
+                          "Make Payment  ",
                           style: GoogleFonts.inder(color: Colors.white, fontWeight: FontWeight.w600),
                         ),
-                        const Icon(Icons.currency_rupee, size: 20, color: Colors.white),
-                        Text(
-                          totalPrice.toString(),
-                         //"100",
-                          style: GoogleFonts.inder(color: Colors.white, fontWeight: FontWeight.w600),
-                        ),
+                        //const Icon(Icons.currency_rupee, size: 20, color: Colors.white),
+                        // Text(
+                        //   totalPrice.toString(),
+                        //  //"100",
+                        //   style: GoogleFonts.inder(color: Colors.white, fontWeight: FontWeight.w600),
+                        // ),
                       ],
                     ),
                   ),

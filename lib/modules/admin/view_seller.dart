@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:terra_treasures/model/seller_model.dart';
+import 'package:terra_treasures/modules/admin/add_quiz.dart';
 import 'package:terra_treasures/modules/admin/admin_home.dart';
 import 'package:terra_treasures/modules/admin/view_buyer.dart';
 import 'package:terra_treasures/util/constants.dart';
@@ -112,11 +113,20 @@ class _ViewBuyerState extends State<ViewSeller> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          "Add quiz",
-                          style: GoogleFonts.inder(),
+                      InkWell(
+                        onTap: () {
+                           Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AddQuiz()),
+                              );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Add quiz",
+                            style: GoogleFonts.inder(),
+                          ),
                         ),
                       ),
                       Padding(

@@ -1,11 +1,14 @@
 
+
 // import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
+// import 'package:terra_treasures/model/quiz_model.dart';
 // import 'package:terra_treasures/modules/admin/admin_home.dart';
-
+// import 'package:terra_treasures/modules/admin/controller/quiz_controller.dart';
 // import 'package:terra_treasures/modules/admin/view_buyer.dart';
 // import 'package:terra_treasures/modules/admin/view_seller.dart';
 // import 'package:terra_treasures/util/constants.dart';
+//  // Import the controller
 
 // class AddQuiz extends StatefulWidget {
 //   const AddQuiz({super.key});
@@ -21,7 +24,7 @@
 //     'Sustainability',
 //     'Sustainability&Biodiversity',
 //     'Sustainability&Textile',
-//     'Sustainability&recycling'
+//     'Sustainability&Recycling'
 //   ];
 
 //   final TextEditingController questionController = TextEditingController();
@@ -31,8 +34,9 @@
 //   final TextEditingController option4Controller = TextEditingController();
 
 //   final _formKey = GlobalKey<FormState>();
+//   final QuizController _quizController = QuizController();  // Create an instance of the controller
 
-//   void _submitQuiz() {
+//   void _submitQuiz() async {
 //     if (_formKey.currentState!.validate()) {
 //       // Collect the data
 //       final String question = questionController.text;
@@ -41,16 +45,27 @@
 //       final String option3 = option3Controller.text;
 //       final String option4 = option4Controller.text;
 
-//       // Example collection to store quiz data
-//       final Map<String, dynamic> quizData = {
-//         'category': selectedCategory,
-//         'question': question,
-//         'options': [option1, option2, option3, option4],
-//         'correctAnswer': correctAnswer,
-//       };
+//       // Create a quiz model instance
+//       final quizData = QuizModel(
+//         category: selectedCategory!,
+//         question: question,
+//         option1: option1,
+//         option2: option2,
+//         option3: option3,
+//         option4: option4,
+//         correct: correctAnswer!,
+//       );
 
-//       // You can store `quizData` in your desired collection/database here
-//       print('Quiz Data: $quizData');
+//       // Store the data using the controller
+//       await _quizController.create(
+//         quizData.category,
+//         quizData.question,
+//         quizData.option1,
+//         quizData.option2,
+//         quizData.option3,
+//         quizData.option4,
+//         quizData.correct,
+//       );
 
 //       // Clear the form
 //       questionController.clear();
@@ -62,6 +77,10 @@
 //         selectedCategory = null;
 //         correctAnswer = null;
 //       });
+
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text('Quiz added successfully!')),
+//       );
 //     }
 //   }
 
@@ -178,128 +197,126 @@
 //                     ),
 //                     Padding(
 //                       padding: const EdgeInsets.only(top: 30),
-//                       child: Expanded(
-//                         child: Center(
-//                           child: SingleChildScrollView(
-//                             child: Form(
-//                               key: _formKey,
-//                               child: Column(
-//                                 children: [
-//                                   Text(
-//                                     "Add Quiz",
-//                                     style: GoogleFonts.inder(fontSize: 24),
-//                                   ),
-//                                   const SizedBox(
-//                                     height: 30,
-//                                   ),
-//                                   Row(
-//                                     mainAxisAlignment:
-//                                         MainAxisAlignment.spaceEvenly,
-//                                     children: [
-//                                       Text(
-//                                         "Select category",
-//                                         style: GoogleFonts.inder(),
-//                                       ),
-//                                       Center(
-//                                         child: DropdownButton<String>(
-//                                           hint: Text(
-//                                             'Select category',
-//                                             style: GoogleFonts.inder(),
-//                                           ),
-//                                           value: selectedCategory,
-//                                           onChanged: (String? newValue) {
-//                                             setState(() {
-//                                               selectedCategory = newValue;
-//                                             });
-//                                           },
-//                                           items: categories
-//                                               .map<DropdownMenuItem<String>>(
-//                                                   (String value) {
-//                                             return DropdownMenuItem<String>(
-//                                               value: value,
-//                                               child: Text(value),
-//                                             );
-//                                           }).toList(),
+//                       child: Center(
+//                         child: SingleChildScrollView(
+//                           child: Form(
+//                             key: _formKey,
+//                             child: Column(
+//                               children: [
+//                                 Text(
+//                                   "Add Quiz",
+//                                   style: GoogleFonts.inder(fontSize: 24),
+//                                 ),
+//                                 const SizedBox(
+//                                   height: 30,
+//                                 ),
+//                                 Row(
+//                                   mainAxisAlignment:
+//                                       MainAxisAlignment.spaceEvenly,
+//                                   children: [
+//                                     Text(
+//                                       "Select category",
+//                                       style: GoogleFonts.inder(),
+//                                     ),
+//                                     Center(
+//                                       child: DropdownButton<String>(
+//                                         hint: Text(
+//                                           'Select category',
+//                                           style: GoogleFonts.inder(),
 //                                         ),
-//                                       )
-//                                     ],
-//                                   ),
-//                                   const SizedBox(
-//                                     height: 30,
-//                                   ),
-//                                   Padding(
-//                                     padding: const EdgeInsets.symmetric(
-//                                         horizontal: 16.0),
-//                                     child: Padding(
-//                                       padding: const EdgeInsets.only(
-//                                         left: 210,
-//                                         right: 100,
+//                                         value: selectedCategory,
+//                                         onChanged: (String? newValue) {
+//                                           setState(() {
+//                                             selectedCategory = newValue;
+//                                           });
+//                                         },
+//                                         items: categories
+//                                             .map<DropdownMenuItem<String>>(
+//                                                 (String value) {
+//                                           return DropdownMenuItem<String>(
+//                                             value: value,
+//                                             child: Text(value),
+//                                           );
+//                                         }).toList(),
 //                                       ),
-//                                       child: Column(
-//                                         children: [
-//                                           _buildTextField(
-//                                               "Question", questionController),
-//                                           const SizedBox(height: 20),
-//                                           _buildTextField(
-//                                               "Option 1", option1Controller),
-//                                           const SizedBox(height: 20),
-//                                           _buildTextField(
-//                                               "Option 2", option2Controller),
-//                                           const SizedBox(height: 20),
-//                                           _buildTextField(
-//                                               "Option 3", option3Controller),
-//                                           const SizedBox(height: 20),
-//                                           _buildTextField(
-//                                               "Option 4", option4Controller),
-//                                           const SizedBox(height: 20),
-//                                           Row(
-//                                             mainAxisAlignment:
-//                                                 MainAxisAlignment.spaceEvenly,
-//                                             children: [
-//                                               Text(
-//                                                 "Correct Answer",
+//                                     )
+//                                   ],
+//                                 ),
+//                                 const SizedBox(
+//                                   height: 30,
+//                                 ),
+//                                 Padding(
+//                                   padding: const EdgeInsets.symmetric(
+//                                       horizontal: 16.0),
+//                                   child: Padding(
+//                                     padding: const EdgeInsets.only(
+//                                       left: 210,
+//                                       right: 100,
+//                                     ),
+//                                     child: Column(
+//                                       children: [
+//                                         _buildTextField(
+//                                             "Question", questionController),
+//                                         const SizedBox(height: 20),
+//                                         _buildTextField(
+//                                             "Option 1", option1Controller),
+//                                         const SizedBox(height: 20),
+//                                         _buildTextField(
+//                                             "Option 2", option2Controller),
+//                                         const SizedBox(height: 20),
+//                                         _buildTextField(
+//                                             "Option 3", option3Controller),
+//                                         const SizedBox(height: 20),
+//                                         _buildTextField(
+//                                             "Option 4", option4Controller),
+//                                         const SizedBox(height: 20),
+//                                         Row(
+//                                           mainAxisAlignment:
+//                                               MainAxisAlignment.spaceEvenly,
+//                                           children: [
+//                                             Text(
+//                                               "Correct Answer",
+//                                               style: GoogleFonts.inder(),
+//                                             ),
+//                                             DropdownButton<String>(
+//                                               hint: Text(
+//                                                 'Select correct answer',
 //                                                 style: GoogleFonts.inder(),
 //                                               ),
-//                                               DropdownButton<String>(
-//                                                 hint: Text(
-//                                                   'Select correct answer',
-//                                                   style: GoogleFonts.inder(),
-//                                                 ),
-//                                                 value: correctAnswer,
-//                                                 onChanged: (String? newValue) {
-//                                                   setState(() {
-//                                                     correctAnswer = newValue;
-//                                                   });
-//                                                 },
-//                                                 items: [
-//                                                   option1Controller.text,
-//                                                   option2Controller.text,
-//                                                   option3Controller.text,
-//                                                   option4Controller.text
-//                                                 ].map<DropdownMenuItem<String>>(
-//                                                     (String value) {
-//                                                   return DropdownMenuItem<String>(
-//                                                     value: value,
-//                                                     child: Text(value),
-//                                                   );
-//                                                 }).toList(),
-//                                               ),
-//                                             ],
-//                                           ),
-//                                           const SizedBox(height: 20),
-//                                           ElevatedButton(
-//                                             style: ElevatedButton.styleFrom(
-//                                               backgroundColor: kPrimaryColor
+//                                               value: correctAnswer,
+//                                               onChanged: (String? newValue) {
+//                                                 setState(() {
+//                                                   correctAnswer = newValue;
+//                                                 });
+//                                               },
+//                                               items: [
+//                                                 option1Controller.text,
+//                                                 option2Controller.text,
+//                                                 option3Controller.text,
+//                                                 option4Controller.text
+//                                               ].map<DropdownMenuItem<String>>(
+//                                                   (String value) {
+//                                                 return DropdownMenuItem<String>(
+//                                                   value: value,
+//                                                   child: Text(value),
+//                                                 );
+//                                               }).toList(),
 //                                             ),
-//                                             onPressed: _submitQuiz,
-//                                             child: Text("Submit",style: GoogleFonts.inder(color:Colors.white),),
+//                                           ],
+//                                         ),
+//                                         const SizedBox(height: 20),
+//                                         ElevatedButton(
+//                                           style: ElevatedButton.styleFrom(
+//                                             backgroundColor: kPrimaryColor
 //                                           ),
-//                                         ],
-//                                       ),
+//                                           onPressed: _submitQuiz,
+//                                           child: Text("Submit",style: GoogleFonts.inder(color:Colors.white),),
+//                                         ),
+//                                       ],
 //                                     ),
 //                                   ),
-//                                 ],
-//                               ),
+//                                 ),
+//                               ],
 //                             ),
 //                           ),
 //                         ),
@@ -365,7 +382,6 @@ import 'package:terra_treasures/modules/admin/controller/quiz_controller.dart';
 import 'package:terra_treasures/modules/admin/view_buyer.dart';
 import 'package:terra_treasures/modules/admin/view_seller.dart';
 import 'package:terra_treasures/util/constants.dart';
- // Import the controller
 
 class AddQuiz extends StatefulWidget {
   const AddQuiz({super.key});
@@ -391,18 +407,16 @@ class _AddQuizState extends State<AddQuiz> {
   final TextEditingController option4Controller = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  final QuizController _quizController = QuizController();  // Create an instance of the controller
+  final QuizController _quizController = QuizController();
 
   void _submitQuiz() async {
     if (_formKey.currentState!.validate()) {
-      // Collect the data
       final String question = questionController.text;
       final String option1 = option1Controller.text;
       final String option2 = option2Controller.text;
       final String option3 = option3Controller.text;
       final String option4 = option4Controller.text;
 
-      // Create a quiz model instance
       final quizData = QuizModel(
         category: selectedCategory!,
         question: question,
@@ -410,9 +424,9 @@ class _AddQuizState extends State<AddQuiz> {
         option2: option2,
         option3: option3,
         option4: option4,
+        correct: correctAnswer!,
       );
 
-      // Store the data using the controller
       await _quizController.create(
         quizData.category,
         quizData.question,
@@ -420,9 +434,9 @@ class _AddQuizState extends State<AddQuiz> {
         quizData.option2,
         quizData.option3,
         quizData.option4,
+        quizData.correct,
       );
 
-      // Clear the form
       questionController.clear();
       option1Controller.clear();
       option2Controller.clear();
@@ -455,11 +469,7 @@ class _AddQuizState extends State<AddQuiz> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(
-              top: 50,
-              bottom: 50,
-              left: 60,
-            ),
+            padding: const EdgeInsets.only(top: 50, bottom: 50, left: 60),
             child: SingleChildScrollView(
               child: Container(
                 width: 900,
@@ -562,9 +572,7 @@ class _AddQuizState extends State<AddQuiz> {
                                   "Add Quiz",
                                   style: GoogleFonts.inder(fontSize: 24),
                                 ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
+                                const SizedBox(height: 30),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -594,12 +602,10 @@ class _AddQuizState extends State<AddQuiz> {
                                           );
                                         }).toList(),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
+                                const SizedBox(height: 30),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16.0),
@@ -648,7 +654,7 @@ class _AddQuizState extends State<AddQuiz> {
                                                 option1Controller.text,
                                                 option2Controller.text,
                                                 option3Controller.text,
-                                                option4Controller.text
+                                                option4Controller.text,
                                               ].map<DropdownMenuItem<String>>(
                                                   (String value) {
                                                 return DropdownMenuItem<String>(
@@ -662,10 +668,14 @@ class _AddQuizState extends State<AddQuiz> {
                                         const SizedBox(height: 20),
                                         ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor: kPrimaryColor
+                                            backgroundColor: kPrimaryColor,
                                           ),
                                           onPressed: _submitQuiz,
-                                          child: Text("Submit",style: GoogleFonts.inder(color:Colors.white),),
+                                          child: Text(
+                                            "Submit",
+                                            style: GoogleFonts.inder(
+                                                color: Colors.white),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -676,7 +686,7 @@ class _AddQuizState extends State<AddQuiz> {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -726,4 +736,3 @@ class _AddQuizState extends State<AddQuiz> {
     );
   }
 }
-
